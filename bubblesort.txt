@@ -1,0 +1,14 @@
+Assignment 1:
+==============
+ Pseudocode and Flowchart for Sorting Algorithm - Write pseudocode and create a flowchart for a bubble sort algorithm. Provide a brief explanation of how the algorithm works and a simple array of integers to demonstrate a dry run of your algorithm.
+
+void bubbleSort(int numbers[], intarray_size){
+   inti, j, temp;
+   for (i = (array_size - 1); i>= 0; i--)
+   for (j = 1; j <= i; j++)
+   if (numbers[j-1] > numbers[j]){
+      temp = numbers[j-1];
+      numbers[j-1] = numbers[j];
+      numbers[j] = temp;
+   }
+}

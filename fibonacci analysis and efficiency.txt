@@ -1,0 +1,65 @@
+calculate the nth Fibonacci number and use Big O notation to analyze its efficiency. Compare this with an iterative approach and discuss the pros and cons in terms of space and time complexity.
+
+public class FibonacciRecursive {
+    public static int fibonacci(int n) {
+        if (n <= 1) {
+            return n;
+        } else {
+            return fibonacci(n - 1) + fibonacci(n - 2);
+        }
+    }
+
+    public static void main(String[] args) {
+        int n = 10; // Example: Calculate the 10th Fibonacci number
+        System.out.println("The " + n + "th Fibonacci number is: " + fibonacci(n));
+    }
+}
+==============
+public class FibonacciIterative {
+    public static int fibonacci(int n) {
+        if (n <= 1) {
+            return n;
+        }
+        int a = 0;
+        int b = 1;
+        for (int i = 2; i <= n; i++) {
+            int temp = b;
+            b = a + b;
+            a = temp;
+        }
+        return b;
+    }
+
+    public static void main(String[] args) {
+        int n = 10; // Example: Calculate the 10th Fibonacci number
+        System.out.println("The " + n + "th Fibonacci number is: " + fibonacci(n));
+    }
+}
+=================
+Efficiency Analysis:
+Recursive Approach:
+
+==>Time Complexity: The time complexity of the recursive Fibonacci function is O(2^n). This is because each call branches into two recursive calls until it reaches the base case. As a result, the number of function calls grows exponentially with the input size.
+Space Complexity: The space complexity of the recursive Fibonacci function is also O(n) because it requires memory for the function call stack.
+Iterative Approach:
+
+==>Time Complexity: The time complexity of the iterative Fibonacci function is O(n). This is because it iterates through the loop 'n' times, each time performing constant-time operations.
+Space Complexity: The space complexity of the iterative Fibonacci function is O(1). It only requires a constant amount of memory for storing the variables 'a', 'b', and 'temp'.
+-----------
+Pros and Cons:
+-----------------------------
+Recursive Approach:
+===================
+==>Pros:
+->More concise and easier to understand.
+Cons:
+->Exponential time complexity makes it inefficient for large inputs.
+->Requires additional memory for the function call stack, leading to ->potential stack overflow errors.
+
+Iterative Approach:
+====================
+==>Pros:
+->More efficient time complexity, making it suitable for large inputs.
+Requires less memory as it does not rely on function call stack.
+==>Cons:
+->More complex due to the loop structure.
