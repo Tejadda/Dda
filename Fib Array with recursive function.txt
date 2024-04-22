@@ -1,0 +1,31 @@
+Create a recursive function to find the nth element of fabinocci  sequence and store the first n elements in an array
+
+import java.util.Arrays;
+
+public class Fibonacci {
+    
+    public static int fibonacci(int n) {
+        if (n <= 1) {
+            return n;
+        }
+        return fibonacci(n - 1) + fibonacci(n - 2);
+    }
+    
+    public static int[] fibonacciArray(int n) {
+        int[] fibArray = new int[n];
+        for (int i = 0; i < n; i++) {
+            fibArray[i] = fibonacci(i);
+        }
+        return fibArray;
+    }
+    
+    public static void main(String[] args) {
+        int n = 10; // Change n as needed
+        
+        int nthElement = fibonacci(n);
+        System.out.println("The " + n + "th element of the Fibonacci sequence: " + nthElement);
+        
+        int[] fibArray = fibonacciArray(n);
+        System.out.println("First " + n + " elements of the Fibonacci sequence: " + Arrays.toString(fibArray));
+    }
+}

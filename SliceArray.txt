@@ -1,0 +1,37 @@
+implement a method SliceArray that takes an array, a starting index, an end index then returs a new array containing the elements from the start to the end index
+
+import java.util.Arrays;
+
+public class SliceArray {
+    
+    public static int[] sliceArray(int[] arr, int start, int end) {
+        // Check if start and end indices are valid
+        if (start < 0 || end < start || end >= arr.length) {
+            throw new IllegalArgumentException("Invalid start or end index.");
+        }
+        
+        // Calculate the length of the new array
+        int length = end - start + 1;
+        
+        // Create a new array to store the sliced elements
+        int[] slicedArray = new int[length];
+        
+        // Copy elements from the original array to the sliced array
+        for (int i = 0; i < length; i++) {
+            slicedArray[i] = arr[start + i];
+        }
+        
+        return slicedArray;
+    }
+    
+    public static void main(String[] args) {
+        int[] array = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        int start = 2;
+        int end = 6;
+        
+        int[] slicedArray = sliceArray(array, start, end);
+        
+        System.out.println("Original array: " + Arrays.toString(array));
+        System.out.println("Sliced array from index " + start + " to " + end + ": " + Arrays.toString(slicedArray));
+    }
+}

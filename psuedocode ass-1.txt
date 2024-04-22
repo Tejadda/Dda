@@ -1,0 +1,15 @@
+Asssignment-1:
+==============
+Write a detailed pseudo code for a simple program which takes a number as input,
+calculates the square if it is even or the cube if it is odd, 
+and then outputs the result.Incorporate conditional and looping construct
+ Answer:
+=========
+->Take input value from a user
+->Read a.
+->Then check a user enterd value is even number or odd number.
+->checking input number as  even
+-> if a%2 == 0
+    print "Square number"
+->else
+  print "Cube number"

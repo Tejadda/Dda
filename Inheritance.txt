@@ -1,0 +1,43 @@
+class Shape {
+    public double area() {
+        return 0.0; // Default implementation, overridden by subclasses
+    }
+}
+
+class Circle extends Shape {
+    private double radius;
+
+    public Circle(double radius) {
+        this.radius = radius;
+    }
+
+   
+    public double area() {
+        return Math.PI * radius * radius;
+    }
+}
+
+class Rectangle extends Shape {
+    private double width;
+    private double height;
+
+    public Rectangle(double width, double height) {
+        this.width = width;
+        this.height = height;
+    }
+
+  
+    public double area() {
+        return width * height;
+    }
+}
+
+class Inheritance {
+    public static void main(String[] args) {
+        Circle circle = new Circle(5.0);
+        Rectangle rectangle = new Rectangle(4.0, 3.0);
+
+        System.out.println("Area of circle: " + circle.area());
+        System.out.println("Area of rectangle: " + rectangle.area());
+    }
+}

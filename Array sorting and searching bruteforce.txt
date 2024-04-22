@@ -1,0 +1,46 @@
+Implement a function called BruteForce Sort that sorts an array using the brute force approach.Use this function to sort an array created with initializeArray
+
+public class BruteForceSort {
+    
+    public static void sort(int[] arr) {
+        int n = arr.length;
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    // Swap arr[j] and arr[j+1]
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+            }
+        }
+    }
+    
+    public static void main(String[] args) {
+        int[] array = initializeArray(10);
+        System.out.println("Original array:");
+        printArray(array);
+        
+        sort(array);
+        
+        System.out.println("Sorted array:");
+        printArray(array);
+    }
+    
+    // Function to initialize an array with random integers
+    public static int[] initializeArray(int size) {
+        int[] arr = new int[size];
+        for (int i = 0; i < size; i++) {
+            arr[i] = (int) (Math.random() * 100); // Generate random integers between 0 and 99
+        }
+        return arr;
+    }
+    
+    // Function to print an array
+    public static void printArray(int[] arr) {
+        for (int num : arr) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
+    }
+}

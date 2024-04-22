@@ -1,0 +1,73 @@
+ASSIGNMENT-3:
+============
+Function design and modularization-create a document that describes the design of 2 modular functions:one that returns the factorial of a number,and another that calculates the nth fabinocci number.Include psuedo code and a brief explination of how modularity in programming helps with code reuse and organization in java...
+
+Factorial Function
+------------------
+public static long factorial(int n) {
+  if (n < 0) {
+    throw new IllegalArgumentException("Number must be non-negative");
+  }
+  if (n == 0 || n == 1) {
+    return 1;
+  }
+  long result = 1;
+  for (int i = 2; i <= n; i++) {
+    result *= i;
+  }
+  return result;
+}
+------------------------
+Factorial Psuedocode
+=====================
+function factorial(n)
+  if n < 0
+    throw error "Number must be non-negative"
+  if n == 0 or n == 1
+    return 1
+  result = 1
+  for i from 2 to n
+    result = result * i
+  return result
+---------------------------
+----------------------------
+Fibonacci Function:
+--------------------
+public static long fibonacci(int n) {
+  if (n < 0) {
+    throw new IllegalArgumentException("Number must be non-negative");
+  }
+  if (n == 0) {
+    return 0;
+  }
+  if (n == 1) {
+    return 1;
+  }
+  long prevPrev = 0;
+  long prev = 1;
+  long current = 1;
+  for (int i = 2; i <= n; i++) {
+    current = prev + prevPrev;
+    prevPrev = prev;
+    prev = current;
+  }
+  return current;
+}
+-----------------------------
+Fibonacci psuedocode:
+======================
+function fibonacci(n)
+  if n < 0
+    throw error "Number must be non-negative"
+  if n == 0
+    return 0
+  if n == 1
+    return 1
+  prevPrev = 0
+  prev = 1
+  current = 1
+  for i from 2 to n
+    current = prev + prevPrev
+    prevPrev = prev
+    prev = current
+  return current

@@ -1,0 +1,31 @@
+write a method that takes 2 strings concatenates them reverse the result and then extracts the middle substring of the given length.ensure your method handles edge cases such as empty string or a substring length larger than the concatenated string
+
+import java.util.Objects;
+
+public class StringManipulation {
+
+    public static String concatenateReverseExtract(String str1, String str2, int substringLength) {
+        // Handle edge cases
+        if (Objects.equals(str1, "") || Objects.equals(str2, "")) {
+            return "";
+        }
+        if (substringLength > (str1.length() + str2.length())) {
+            return "";
+        }
+
+        // Concatenate, reverse, and extract middle substring
+        StringBuilder sb = new StringBuilder(str1).append(str2).reverse();
+        int startIndex = (sb.length() - substringLength) / 2;
+        int endIndex = startIndex + substringLength;
+
+        return sb.substring(startIndex, endIndex);
+    }
+
+    public static void main(String[] args) {
+        String str1 = "hello";
+        String str2 = "world";
+        int substringLength = 5;
+
+        System.out.println(concatenateReverseExtract(str1, str2, substringLength));
+    }
+}

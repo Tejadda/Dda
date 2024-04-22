@@ -1,0 +1,18 @@
+write a reverse function namedSumArray that calculates and returns the sum of elements in an array,demonstrates with example
+
+public class SumArray {
+    
+    public static int reverse(int[] arr) {
+        int sum = 0;
+        for (int i = arr.length - 1; i >= 0; i--) {
+            sum += arr[i];
+        }
+        return sum;
+    }
+    
+    public static void main(String[] args) {
+        int[] array = {1, 2, 3, 4, 5};
+        int sum = reverse(array);
+        System.out.println("Sum of elements in reverse order: " + sum);
+    }
+}

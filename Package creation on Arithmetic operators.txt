@@ -1,0 +1,52 @@
+// src/com/math/operations/Addition.java
+package com.math.operations;
+
+public class Addition {
+    public double add(double a, double b) {
+        return a + b;
+    }
+}
+-------------------
+create a class Subtraction for subtraction operation
+
+// src/com/math/operations/Subtraction.java
+package com.math.operations;
+
+public class Subtraction {
+    public double subtract(double a, double b) {
+        return a - b;
+    }
+}
+----------------------
+
+the base directory of the package com.math.operations is /home/user/myproject.
+
+$ export CLASSPATH=/home/user/myproject
+$ javac src/com/math/operations/Addition.java
+$ javac src/com/math/operations/Subtraction.java
+-------------
+create a test program TestOperations in the default package
+
+// TestOperations.java
+import com.math.operations.*;
+
+public class TestOperations {
+    public static void main(String[] args) {
+        Addition addition = new Addition();
+        Subtraction subtraction = new Subtraction();
+
+        System.out.println("Addition: " + addition.add(10, 5));
+        System.out.println("Subtraction: " + subtraction.subtract(10, 5));
+    }
+}
+-------------------------
+set the classpath to the base directory of the package and compile the test program:
+
+$ export CLASSPATH=/home/user/myproject
+$ javac TestOperations.java
+----------
+run the test program
+
+$ export CLASSPATH=/home/user/myproject
+$ java TestOperations
+-----------
