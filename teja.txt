@@ -1,0 +1,44 @@
+1.)What is the primary responsibility of the Scrum Master?
+a) Setting project priorities 
+b) Ensuring the team follows Scrum principles 
+c) Designing the product 
+d) Managing the product backlog
+Answer:option-a
+
+Explanation: The primary responsibility of the Scrum Master is to ensure the team follows Scrum principles, practices, rules, and values.
+
+2.)How long does a typical Sprint last in Scrum?
+ a) 1 week
+ b) 2 weeks 
+ c) 1 month 
+ d) 3 months
+Answer:option-b
+
+Explanation: A typical Sprint in Scrum lasts 2-4 weeks, with 2 weeks being the most common duration.
+
+3.)What is the main purpose of the Sprint Review in Scrum? 
+a) Identifying and removing project roadblocks 
+b) Inspecting the increment and adapting the product backlog 
+c) Planning the next Sprint 
+d) Evaluating team performance
+Answer:option-b
+
+Explanation: The main purpose of the Sprint Review is to inspect the increment and adapt the product backlog, ensuring that the project stays on track and meets stakeholder expectations.
+
+4.)Which of the following is NOT a role in Scrum? 
+a) Product Owner 
+b) Scrum Master 
+c) Project Manager 
+d) Scrum Team
+Answer-option-c
+
+Explanation: In Scrum, the role of the Project Manager is not explicitly defined, as the Scrum Team is self-organizing and cross-functional.
+
+5.)What is the main purpose of the Sprint Backlog in Scrum? 
+a) To define the project scope 
+b) To plan the next Sprint 
+c) To track project progress 
+d) To prioritize product features
+Answer:option-b
+
+Explanation: The main purpose of the Sprint Backlog is to plan the next Sprint, detailing the work items the team has committed to delivering during that Sprint.
