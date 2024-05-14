@@ -1,0 +1,63 @@
+Design a database schema for a library system, including tables, fields, and constraints like NOT NULL, UNIQUE, and CHECK. Include primary and foreign keys to establish relationships between tables.
+
+CREATE DATABASE Library;
+
+USE Library;
+
+CREATE TABLE Author (
+    AuthorID INT PRIMARY KEY,
+    FirstName VARCHAR(50) NOT NULL,
+    LastName VARCHAR(50) NOT NULL,
+    Biography TEXT
+);
+
+CREATE TABLE Book (
+    BookID INT PRIMARY KEY,
+    Title VARCHAR(100) NOT NULL,
+    PublicationYear YEAR NOT NULL,
+    AuthorID INT,
+    CategoryID INT,
+    PublisherID INT,
+    FOREIGN KEY (AuthorID) REFERENCES Author(AuthorID),
+    FOREIGN KEY (CategoryID) REFERENCES Category(CategoryID),
+    FOREIGN KEY (PublisherID) REFERENCES Publisher(PublisherID)
+);
+
+CREATE TABLE Category (
+    CategoryID INT PRIMARY KEY,
+    Name VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE Publisher (
+    PublisherID INT PRIMARY KEY,
+    Name VARCHAR(100) NOT NULL,
+    Address VARCHAR(255)
+);
+
+CREATE TABLE Copy (
+    CopyID INT PRIMARY KEY,
+    BookID INT,
+    CopyNumber INT NOT NULL,
+    Available BOOLEAN NOT NULL CHECK (Available IN (0, 1)),
+    FOREIGN KEY (BookID) REFERENCES Book(BookID)
+);
+
+CREATE TABLE Patron (
+    PatronID INT PRIMARY KEY,
+    FirstName VARCHAR(50) NOT NULL,
+    LastName VARCHAR(50) NOT NULL,
+    Address VARCHAR(255),
+    Phone VARCHAR(20),
+    Email VARCHAR(100)
+);
+
+CREATE TABLE Loan (
+    LoanID INT PRIMARY KEY,
+    CopyID INT,
+    PatronID INT,
+    Date BDATETIME NOT NULL,
+    DueDate BDATETIME NOT NULL,
+    Returned BOOLEAN NOT NULL CHECK (Returned IN (0, 1)),
+    FOREIGN KEY (CopyID) REFERENCES Copy(CopyID),
+    FOREIGN KEY (PatronID) REFERENCES Patron(PatronID)
+);
