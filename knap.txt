@@ -1,0 +1,98 @@
+package com.dynamicprogrammingalgorithms;
+// Knapsack0/1 problem
+public class Knapsack {
+	// Function to solve the 0/1 Knapsack problem
+    public static int knapsack(int[] weights, int[] values, int weightLimit) {
+        int n = weights.length;
+        int[][] dp = new int[n + 1][weightLimit + 1];
+ 
+        for (int i = 0; i <= n; i++) {
+            for (int w = 0; w <= weightLimit; w++) {
+                if (i == 0 || w == 0) {
+                    dp[i][w] = 0;
+                } else if (weights[i - 1] <= w) {
+                    dp[i][w] = Math.max(dp[i - 1][w], dp[i - 1][w - weights[i - 1]] + values[i - 1]);
+                } else {
+                    dp[i][w] = dp[i - 1][w];
+                }
+            }
+        }
+        return dp[n][weightLimit];
+    }
+ 
+    public static void main(String[] args) {
+        int[] weights = {2, 3, 4, 5};
+        int[] values = {3, 4, 5, 6};
+        int weightLimit = 5;
+        System.out.println("Maximum value in knapsack = " + knapsack(weights, values, weightLimit));
+    }
+}
+ 
+Task 1: Knapsack Problem Write a function... by Maria (Guest)
+Maria (Guest)
+12:13 PM
+Task 1: Knapsack Problem
+Write a function int Knapsack(int W, int[] weights, int[] values) in Java that determines the maximum value of items that can fit into a knapsack with a capacity W. The function should handle up to 100 items. Find the optimal way to fill the knapsack with the given items to achieve the maximum total value. You must consider that you cannot break items, but have to include them whole.
+ 
+Task 2: Longest Common Subsequence
+Implement int LCS(string text1, string text2)  to find the length of the longest common subsequence between two strings.
+
+package com.computationalalgorithms; impor... by Maria (Guest)
+Maria (Guest)
+12:14 PM
+package com.computationalalgorithms;
+import java.util.Arrays;
+import java.util.Comparator;
+ 
+class Item {
+    int value, weight;
+ 
+    Item(int value, int weight) {
+        this.value = value;
+        this.weight = weight;
+    }
+}
+public class FractionalKnapsack {
+	 private static double getMaxValue(Item[] items, int capacity) {
+	        // Sorting items by value-to-weight ratio
+	        Arrays.sort(items, new Comparator<Item>() {
+	            @Override
+	            public int compare(Item o1, Item o2) {
+	                double r1 = (double) o1.value / o1.weight;
+	                double r2 = (double) o2.value / o2.weight;
+	                return Double.compare(r2, r1);
+	            }
+	        });
+ 
+	        double totalValue = 0.0;
+	        
+	        for (Item item : items) {
+	            if (capacity - item.weight >= 0) {
+	                // If the item can be added completely
+	                capacity -= item.weight;
+	                totalValue += item.value;
+	            } else {
+	                // If the item can be added fractionally
+	                totalValue += item.value * ((double) capacity / item.weight);
+	                break;
+	            }
+	        }
+ 
+	        return totalValue;
+	    }
+ 
+	    public static void main(String[] args) {
+	        Item[] items = {
+	            new Item(60, 10),
+	            new Item(100, 20),
+	            new Item(120, 30)
+	        };
+	        int capacity = 50;
+	        
+	        double maxValue = getMaxValue(items, capacity);
+	        System.out.println("Maximum value we can obtain = " + maxValue);
+	    }
+}
+ 
+has context menu
+Compose
