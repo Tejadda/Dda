@@ -1,0 +1,150 @@
+package com.commoncode;     import java.u... by Maria (Guest)
+Maria (Guest)
+12:23 PM
+package com.commoncode;
+ 
+ 
+import java.util.Arrays;
+ 
+public class NestedforLoopEx {
+ 
+	public static void main(String[] args) {
+		int[] array= new int[5];
+		for(int j=5;j>0;j--)
+		{			array[5-j]=j;
+			}
+			Arrays.fill(array,1,5,8);
+			
+			for(int j=0;j<5;j++)
+			{
+				System.out.print(array[j]);
+		}
+		
+	}
+ 
+}
+bbbbb by Maria (Guest)
+Maria (Guest)
+12:23 PM
+bbbbb
+package com.commoncode;     interface An{... by Maria (Guest)
+Maria (Guest)
+12:24 PM
+package com.commoncode;
+ 
+ 
+interface An{
+	default void show() {
+		System.out.println("A");
+	}
+}
+interface Bn{
+	default void show() {
+		System.out.println("B");
+	}
+}
+class C implements An,Bn{
+ 
+	@Override
+	public void show() {
+		// TODO Auto-generated method stub
+		An.super.show();
+	}
+	
+}
+ 
+public class Test2 {
+ 
+	public static void main(String[] args) {
+ 
+C c=new C();
+c.show();
+ 
+	}
+ 
+}
+ 
+cccc by Maria (Guest)
+Maria (Guest)
+12:24 PM
+cccc
+package com.commoncode;   public class ... by Maria (Guest)
+Maria (Guest)
+12:24 PM
+package com.commoncode;
+ 
+public class Test6 {
+	public static void main(String[] args) {
+		int x=-4;
+		System.out.println(x>>1);
+		int y=4;
+		System.out.println(y>>1);;
+ 
+	}
+}
+ 
+dddd by Maria (Guest)
+Maria (Guest)
+12:24 PM
+dddd
+package com.commoncode;     class Base{  ... by Maria (Guest)
+Maria (Guest)
+12:24 PM
+package com.commoncode;
+ 
+ 
+class Base{
+	static String s="Super class";
+public	Base(){
+		System.out.printf("1");
+	}
+}
+ 
+public class Derived extends Base {
+	public Derived() {
+		super(); //1 2
+		System.out.printf("2");
+			
+	}
+	
+	public static void main(String[] args) {
+		Derived d=new Derived();
+	}
+}
+eeee by Maria (Guest)
+Maria (Guest)
+12:24 PM
+eeee
+package com.commoncode;   //private - defa... by Maria (Guest)
+Maria (Guest)
+12:24 PM
+package com.commoncode;
+ 
+//private - default,protected,public
+ 
+class A{
+	int i;
+	void display() {
+		System.out.println(i);
+	
+	}
+}
+class B extends A{
+	int j;
+		void  display() {
+		System.out.println(j);
+	
+	}
+}
+public class InheritanceDemo {
+ 
+	public static void main(String[] args) {
+	
+B obj=new B();
+obj.i=1;
+obj.j=2;
+obj.display();
+	}
+ 
+}
+has context menu
