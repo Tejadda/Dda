@@ -1,0 +1,29 @@
+package com.javaflow;
+ 
+ 
+public class InstanceAndStaticControlFlow1 {
+ 
+	private static String m1(String msg)
+	{
+		System.out.println(msg);
+		return msg;
+		
+	}
+	public InstanceAndStaticControlFlow1(){
+		m=m1("1");
+	}
+	
+	{
+		m=m1("2");
+	}
+	
+	String m=m1("3");// instance variable
+	
+	
+	public static void main(String[] args)
+	{
+		InstanceAndStaticControlFlow1 i=new InstanceAndStaticControlFlow1();
+	}
+ 
+}
+ 
