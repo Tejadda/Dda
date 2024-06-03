@@ -1,0 +1,8 @@
+ask 5: Thread Pools and Concurrency Utilities
+Create a fixed-size thread pool and submit multiple tasks that perform complex calculations or I/O operations and observe the execution.
+ 
+Task 6: Executors, Concurrent Collections, CompletableFuture
+Use an ExecutorService to parallelize a task that calculates prime numbers up to a given number and then use CompletableFuture to write the results to a file asynchronously.
+ 
+Task 7: Writing Thread-Safe Code, Immutable Objects
+Design a thread-safe Counter class with increment and decrement methods. Then demonstrate its usage from multiple threads. Also, implement and use an immutable class to share data between threads.
