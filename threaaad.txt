@@ -1,0 +1,13 @@
+Task 1: Creating and Managing Threads
+Write a program that starts two threads, where each thread prints numbers from 1 to 10 with a 1-second delay between each number.
+ 
+Task 2: States and Transitions
+Create a Java class that simulates a thread going through different lifecycle states: NEW, RUNNABLE, WAITING, TIMED_WAITING, BLOCKED, and TERMINATED. Use methods like sleep(), wait(), notify(), and join() to demonstrate these states..
+ 
+Task 3: Synchronization and Inter-thread Communication
+Implement a producer-consumer problem using wait() and notify() methods to handle the correct processing sequence between threads.
+ 
+Task 4: Synchronized Blocks and Methods
+Write a program that simulates a bank account being accessed by multiple threads to perform deposits and withdrawals using synchronized methods to prevent race conditions.
+
+has context menu
