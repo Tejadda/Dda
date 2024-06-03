@@ -1,0 +1,11 @@
+[5:35 PM] Maria
+Day 19:
+
+Task 1: Generics and Type Safety
+
+Create a generic Pair class that holds two objects of different types, and write a method to return a reversed version of the pair."
+
+[5:36 PM] Maria
+Task 2: Generic Classes and Methods
+
+Implement a generic method that swaps the positions of two elements in an array, regardless of their type, and demonstrate its usage with different object types.
