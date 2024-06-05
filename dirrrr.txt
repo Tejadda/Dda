@@ -1,0 +1,41 @@
+package com.javaio;
+
+import java.io.File;
+import java.io.IOException;
+
+public class ListFilesInDirectory {
+    public static void main(String[] args) {
+        // Specify the directory path
+        String directoryPath = "E:\\MariaFolder";
+
+        // Create a File object for the directory
+        File directory = new File(directoryPath);
+
+        // Ensure the directory exists
+        if (!directory.exists()) {
+            if (directory.mkdirs()) {
+                System.out.println("Directory created successfully: " + directory.getAbsolutePath());
+            } else {
+                System.err.println("Failed to create directory: " + directory.getAbsolutePath());
+                return;
+            }
+        }
+
+        // Get the list of files and directories
+        File[] filesList = directory.listFiles();
+
+        // Check if the directory is not empty
+        if (filesList != null) {
+            int count = filesList.length;
+            System.out.println("Files and directories in " + directoryPath + ":");
+
+            for (File file : filesList) {
+                System.out.println(file.getName());
+            }
+
+            System.out.println("Total number of files and directories: " + count);
+        } else {
+            System.out.println("The directory is empty or does not exist.");
+        }
+    }
+}
