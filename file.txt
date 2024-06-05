@@ -1,0 +1,47 @@
+[10:42 AM] Maria
+1.how to create a file?
+
+2.how to create a Directory?
+
+3.how to list the files of a directory and the count?
+
+4.How to list the files present in directory?
+
+5.How to list the folder present in directory?
+[10:42 AM] Maria
+package com.javaio;
+ 
+import java.io.File;
+ 
+public class FileExample3 {
+	public static void main(String[] args) {
+		int count=0;
+		File f=new File("E:\\MariaFolder");
+		
+		String[] s=f.list();
+		for(String s1:s) {
+			File f1=new File(f,s1);
+			if(f1.isDirectory()) {
+				//if(f1.isFile()) {
+					count++;
+				System.out.println(s1);
+				}
+			
+			
+		}
+		System.out.println(count);
+	}
+}
+  for (String fileName : newFileNames) {
+            File newFile = new File(directory, fileName);
+            try {
+                if (newFile.createNewFile()) {
+                    System.out.println("File created: " + newFile.getName());
+                } else {
+                    System.out.println("File already exists: " + newFile.getName());
+                }
+            } catch (IOException e) {
+                System.err.println("Failed to create file: " + newFile.getName());
+                e.printStackTrace();
+            }
+        }
