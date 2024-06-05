@@ -1,0 +1,229 @@
+Task 3: New IO (NIO)
+Use NIO Channels and Buffers to read content from a file and write to another file.
+ 
+Task 4: Java Networking
+Write a simple HTTP client that connects to a URL, sends a request, and displays the response headers and body.
+ 
+Task 5: Java Networking and Serialization
+Develop a basic TCP client and server application where the client sends a serialized object with 2 numbers and operation  to be performed on them to the server, and the server computes the result and sends it back to the client. for eg, we could send  2, 2, ""+"" which would mean 2 + 2
+
+has context menu
+
+import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
+import java.nio.file.Paths;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
+
+public class NIOFileCopy {
+    public static void main(String[] args) {
+        // Specify the paths of input and output files
+        Path sourcePath = Paths.get("input.txt");
+        Path destPath = Paths.get("output.txt");
+
+        try (FileChannel sourceChannel = FileChannel.open(sourcePath, StandardOpenOption.READ);
+             FileChannel destChannel = FileChannel.open(destPath, StandardOpenOption.CREATE, StandardOpenOption.WRITE)) {
+
+            // Create a ByteBuffer for reading data
+            ByteBuffer buffer = ByteBuffer.allocate(1024);
+
+            // Read data from the source file into the buffer
+            while (sourceChannel.read(buffer) != -1) {
+                // Flip the buffer for writing
+                buffer.flip();
+
+                // Write data from the buffer to the destination file
+                destChannel.write(buffer);
+
+                // Clear the buffer for the next read
+                buffer.clear();
+            }
+
+            System.out.println("Content copied from input.txt to output.txt");
+        } catch (IOException e) {
+            System.err.println("Error occurred: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+}
+===========
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+public class SimpleHTTPClient {
+    public static void main(String[] args) {
+        String urlString = "http://example.com";
+
+        try {
+            // Create a URL object with the specified URL string
+            URL url = new URL(urlString);
+
+            // Open a connection to the URL
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+            // Set request method
+            connection.setRequestMethod("GET");
+
+            // Get the response code
+            int responseCode = connection.getResponseCode();
+            System.out.println("Response Code: " + responseCode);
+
+            // Read and print response headers
+            System.out.println("Response Headers:");
+            connection.getHeaderFields().forEach((key, value) -> {
+                System.out.println(key + ": " + value);
+            });
+
+            // Read and print response body
+            System.out.println("\nResponse Body:");
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    System.out.println(line);
+                }
+            }
+
+            // Disconnect the connection
+            connection.disconnect();
+        } catch (IOException e) {
+            System.err.println("Error: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+}
+
+================
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+public class TCPServer {
+    public static void main(String[] args) {
+        int port = 8080;
+
+        try (ServerSocket serverSocket = new ServerSocket(port)) {
+            System.out.println("Server is listening on port " + port);
+
+            while (true) {
+                Socket socket = serverSocket.accept();
+                System.out.println("Client connected: " + socket);
+
+                try (ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
+                     ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream())) {
+
+                    // Read serialized object from client
+                    CalculationRequest request = (CalculationRequest) inputStream.readObject();
+                    System.out.println("Received request: " + request);
+
+                    // Perform calculation
+                    double result = calculate(request);
+
+                    // Send result back to client
+                    outputStream.writeDouble(result);
+                    outputStream.flush();
+                    System.out.println("Result sent to client: " + result);
+                } catch (ClassNotFoundException e) {
+                    System.err.println("Error: " + e.getMessage());
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Error: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    private static double calculate(CalculationRequest request) {
+        double num1 = request.getNum1();
+        double num2 = request.getNum2();
+        String operation = request.getOperation();
+
+        switch (operation) {
+            case "+":
+                return num1 + num2;
+            case "-":
+                return num1 - num2;
+            case "*":
+                return num1 * num2;
+            case "/":
+                if (num2 == 0) {
+                    throw new IllegalArgumentException("Cannot divide by zero");
+                }
+                return num1 / num2;
+            default:
+                throw new IllegalArgumentException("Invalid operation: " + operation);
+        }
+    }
+}
+------------import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
+
+public class TCPClient {
+    public static void main(String[] args) {
+        String serverAddress = "localhost";
+        int serverPort = 8080;
+
+        try (Socket socket = new Socket(serverAddress, serverPort);
+             ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
+             ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream())) {
+
+            // Create and send serialized object to server
+            CalculationRequest request = new CalculationRequest(2, 2, "+");
+            outputStream.writeObject(request);
+            outputStream.flush();
+            System.out.println("Request sent to server: " + request);
+
+            // Receive result from server
+            double result = inputStream.readDouble();
+            System.out.println("Result received from server: " + result);
+
+        } catch (IOException e) {
+            System.err.println("Error: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+}
+-----
+import java.io.Serializable;
+
+public class CalculationRequest implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+    private double num1;
+    private double num2;
+    private String operation;
+
+    public CalculationRequest(double num1, double num2, String operation) {
+        this.num1 = num1;
+        this.num2 = num2;
+        this.operation = operation;
+    }
+
+    public double getNum1() {
+        return num1;
+    }
+
+    public double getNum2() {
+        return num2;
+    }
+
+    public String getOperation() {
+        return operation;
+    }
+
+    @Override
+    public String toString() {
+        return "CalculationRequest{" +
+                "num1=" + num1 +
+                ", num2=" + num2 +
+                ", operation='" + operation + '\'' +
+                '}';
+    }
+}
