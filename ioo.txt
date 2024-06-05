@@ -1,0 +1,66 @@
+package com.javaio;
+ 
+import java.io.FileWriter;
+import java.io.IOException;
+ 
+public class FileWritingExample {
+    public static void main(String[] args) throws IOException {
+
+      //  FileWriter fw  = new FileWriter("example.txt");//override
+        FileWriter fw  = new FileWriter("example.txt",true);// append
+            fw.write("Hi!");
+            fw.write("This Batch\n is a very good batch");
+            fw.write('\n');
+            char[] ch= {'a','b','c'};
+            fw.write(ch);
+            fw.write('\n');
+            fw.flush();
+            fw.close();
+ 
+    }}
+
+package com.javaio; //Constructors //Fi... by Maria (Guest)
+Maria (Guest)
+11:57 AM
+package com.javaio;
+//Constructors
+//FileReader f=new FileReader(File f);
+//FileReader f1=new FileReader(String fname);
+import java.io.FileReader;
+import java.io.IOException;
+ 
+public class FileReadingExample {
+    public static void main(String[] args) {
+        FileReader reader = null;
+        try {
+            reader = new FileReader("example.txt");
+            int character;
+            while ((character = reader.read()) != -1) {// if u don't have any data to read it will return -1
+                System.out.print((char) character);// type casting the unicode value with char
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } 
+        finally {
+            try {
+                if (reader != null) {
+                    reader.close();
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+}
+// Methods
+//1.int read();
+//2.int read(char[] ch)
+//3.close
+Task 1: Java IO Basics Write a program th... by Maria (Guest)
+Maria (Guest)
+11:58 AM
+Task 1: Java IO Basics
+Write a program that reads a text file and counts the frequency of each word using FileReader and FileWriter.
+
+has context menu
+Compose
