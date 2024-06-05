@@ -1,0 +1,26 @@
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.io.IOException;
+
+public class PrintWriterExample {
+    public static void main(String[] args) {
+        String fileName = "output.txt";
+
+        try (PrintWriter writer = new PrintWriter(new FileWriter(fileName))) {
+            // Writing strings to the file
+            writer.println("Hello, world!");
+            writer.println("This is a PrintWriter example.");
+            writer.println("Printing numbers:");
+
+            // Writing numbers to the file
+            for (int i = 1; i <= 5; i++) {
+                writer.println(i);
+            }
+
+            System.out.println("Text has been written to " + fileName);
+        } catch (IOException e) {
+            System.err.println("Error writing to file: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+}
