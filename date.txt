@@ -1,0 +1,230 @@
+[10:49 AM] Maria
+package com.java8dateandtime;
+ 
+import java.time.*;
+ 
+ 
+// joda.org ->Joda Time API
+public class Example1 {
+ 
+	public static void main(String[] args) {
+		/*
+		LocalDate date=LocalDate.now();
+		System.out.println(date);
+		
+		LocalTime time=LocalTime.now();
+		System.out.println(time);
+		*/
+		
+		//LocalDate
+		/*
+		LocalDate date=LocalDate.now();
+		System.out.println(date);
+		int day=date.getDayOfMonth();
+		int month=date.getMonthValue();
+		int year=date.getYear();
+		
+		System.out.println(day+"-"+month+"-"+year);
+		System.out.printf("%d-%d-%d",day,month,year);
+		
+		*/
+		
+		//LocalTime
+		LocalTime time=LocalTime.now();
+		//System.out.println(time);
+		int hour=time.getHour();
+		int min=time.getMinute();
+		int sec=time.getSecond();
+		int nanos=time.getNano();
+		
+		System.out.printf("%d:%d:%d:%d",hour,min,sec,nanos);
+		
+		
+	}
+ 
+}
+ 
+[10:49 AM] Maria
+aaaaa
+[10:49 AM] Maria
+package com.java8dateandtime;
+ 
+import java.time.LocalDateTime;
+
+import java.time.Month;
+ 
+public class Example2 {
+
+	public static void main(String[] args) {
+
+		LocalDateTime dt=LocalDateTime.now();
+
+		//System.out.println(dt);
+
+		int d=dt.getDayOfMonth();
+
+		int m=dt.getMonthValue();
+
+		int y=dt.getYear();
+
+		//System.out.printf("%d-%d-%d",d,m,y);
+
+		//System.out.println();
+
+		int h=dt.getHour();
+
+		int mi=dt.getMinute();
+
+		int s=dt.getSecond();
+
+		int n=dt.getNano();
+
+		//System.out.printf("%d:%d:%d:%d",h,mi,s,n);
+
+		//LocalDateTime.of(yy,mm,dd,h,m,s,n);
+
+		LocalDateTime dt1=LocalDateTime.of(1993,Month.JUNE,03,8,32);
+
+		System.out.println("After 6 months "+dt1.plusMonths(5));
+
+		System.out.println("After 6 months "+dt1.minusMonths(5));
+
+}
+
+}
+
+[10:49 AM] Maria
+bbbb
+[10:50 AM] Maria
+package com.java8dateandtime;
+ 
+import java.time.LocalDate;
+
+import java.time.Period;
+ 
+public class Example3 {
+ 
+	public static void main(String[] args) {
+
+		LocalDate birthday=LocalDate.of(2001, 6, 13);
+
+		LocalDate currentdate=LocalDate.now();
+
+	Period p=Period.between(birthday, currentdate);
+
+System.out.printf("Your age is %d years %d months and % days",p.getYears(),p.getMonths(),p.getDays());
+
+	}
+ 
+}
+ 
+// Explore the Year class as well
+
+[10:50 AM] Maria
+cccc
+[10:50 AM] Maria
+package com.java8dateandtime;
+ 
+import java.time.ZoneId;
+
+import java.time.ZonedDateTime;
+ 
+public class Example4 {
+
+public static void main(String[] args) {
+
+	ZoneId zone=ZoneId.systemDefault();
+
+	System.out.println(zone);
+
+	ZoneId ame =ZoneId.of("Asia/Calcutta");
+
+	ZonedDateTime ztamer=ZonedDateTime.now(ame);
+
+	System.out.println(ztamer);
+
+}
+
+}
+
+/*
+
+LocalDate
+
+LocalTime
+
+LocalDateTime
+
+Period
+
+Year
+
+TemporalAdjusters / TemporalAdjuster
+
+ZoneId
+
+ZonedDateTime
+ 
+ 
+*/
+[10:50 AM] Maria
+ddd
+[10:50 AM] Maria
+package com.java8dateandtime;
+ 
+import java.time.DayOfWeek;
+
+import java.time.LocalDate;
+
+import java.time.temporal.TemporalAdjusters;
+ 
+public class TemporalAdjusterExample {
+
+	public static void main(String[] args) {
+
+        LocalDate today = LocalDate.now();
+
+        System.out.println("Today: " + today);
+ 
+        // Find the first day of the current month
+
+        LocalDate firstDayOfMonth = today.with(TemporalAdjusters.firstDayOfMonth());
+
+        System.out.println("First day of this month: " + firstDayOfMonth);
+ 
+        // Find the next Monday
+
+        LocalDate nextMonday = today.with(TemporalAdjusters.next(DayOfWeek.MONDAY));
+
+        System.out.println("Next Monday: " + nextMonday);
+ 
+        // Find the last day of the current month
+
+        LocalDate lastDayOfMonth = today.with(TemporalAdjusters.lastDayOfMonth());
+
+        System.out.println("Last day of this month: " + lastDayOfMonth);
+
+    }
+
+}
+
+/*
+ 
+TemporalAdjusters.firstDayOfMonth()
+
+TemporalAdjusters.lastDayOfMonth()
+
+TemporalAdjusters.firstDayOfNextMonth()
+
+TemporalAdjusters.firstInMonth(DayOfWeek dayOfWeek)
+
+TemporalAdjusters.next(DayOfWeek dayOfWeek)
+
+TemporalAdjusters.previous(DayOfWeek dayOfWeek)
+ 
+ 
+*/
+Task 6: Java 8 Date and Time API
+Write a program that calculates the number of days between two dates input by the user."
+Task 7: Timezone
+Create a timezone converter that takes a time in one timezone and converts it to another timezone.
