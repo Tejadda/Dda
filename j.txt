@@ -1,0 +1,10 @@
+create database wipro_test;
+use wipro_test;
+create table employees(id int,first_name varchar(100),last_name varchar(100), age int);
+create table user(id int, username varchar(100), email varchar(100), status varchar(100));
+ 
+select * from user;
+select * from employees;
+ 
+truncate table user;
+truncate table employees;
