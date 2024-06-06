@@ -1,0 +1,449 @@
+create database wipro_test;
+use wipro_test;
+create table employees(id int,first_name varchar(100),last_name varchar(100), age int);
+create table user(id int, username varchar(100), email varchar(100), status varchar(100));
+ 
+select * from user;
+select * from employees;
+ 
+truncate table user;
+truncate table employees;
+====================
+
+package com.jdbc;
+ 
+import java.sql.Connection;
+
+import java.sql.DriverManager;
+
+import java.sql.ResultSet;
+
+import java.sql.SQLException;
+
+import java.sql.Statement;
+ 
+public class JDBCConnect {
+ 
+// JDBC URL, username, and password of MySQL server
+
+static final String JDBC_URL ="jdbc:mysql://localhost:3306/wipro_test";
+
+static final String USERNAME = "root";
+
+static final String PASSWORD = "rps@2345";
+ 
+ 
+public static void main(String[] args) {
+ 
+	try {
+
+		Class.forName("com.mysql.cj.jdbc.Driver");
+
+		} 
+
+	catch (ClassNotFoundException e) {
+
+		e.printStackTrace();
+
+		return;
+
+		}
+
+		// Step 1: Establish a connection
+
+		try (Connection connection =DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD)) 
+
+		{
+
+		// Step 2: Create a Statement
+
+		try (Statement statement = connection.createStatement())
+
+		{
+
+		// Step 3: Create (Insert)
+
+		insertData(statement, 3, "Manyam", "Vinay", 24);
+
+		// Step 4: Read (Retrieve)
+
+		retrieveData(statement);
+
+		// Step 5: Update (Modify)
+
+		updateData(statement, 1, 31);
+
+		// Step 6: Read (Retrieve) after update
+
+		retrieveData(statement);
+
+		// Step 7: Delete (Remove)
+
+		deleteData(statement, 3);
+
+		// Step 8: Read (Retrieve) after delete
+
+	retrieveData(statement);
+
+		} 
+
+		catch (SQLException e) {
+
+		e.printStackTrace();
+
+		}
+ 
+ 
+} catch (SQLException e) {
+
+// TODO Auto-generated catch block
+
+e.printStackTrace();
+
+}
+
+		}
+ 
+// Method to insert data into the table
+
+private static void insertData(Statement statement, int id,String firstName, String lastName, int age) throws SQLException {
+
+String insertQuery = "INSERT INTO employees (id, first_name,last_name, age) VALUES (" + id + ", '" + firstName + "', '" + lastName+ "', " + age + ")";
+
+statement.executeUpdate(insertQuery);
+
+System.out.println("Data inserted successfully.");
+
+}
+ 
+ 
+// Method to retrieve data from the table
+
+private static void retrieveData(Statement statement) throws SQLException {
+String selectQuery = "SELECT * FROM employees";
+try (ResultSet resultSet = statement.executeQuery(selectQuery)){
+System.out.println("Employee data:");
+while (resultSet.next()) 
+{
+System.out.println("ID: " + resultSet.getInt("id")+", Name: " + resultSet.getString("first_name")+ " " + resultSet.getString("last_name") +
+", Age: " + resultSet.getInt("age"));
+
+}
+
+System.out.println();
+
+}}
+ 
+ 
+// Method to update data in the  table
+
+private static void updateData(Statement statement, int id,int newAge) throws SQLException {
+
+	String updateQuery = "UPDATE employees SET age = " + newAge+" WHERE id = " + id;
+
+	statement.executeUpdate(updateQuery);
+
+	System.out.println("Data updated successfully.");
+
+	}
+
+	// Method to delete data from the table
+
+	private static void deleteData(Statement statement, int id) throws SQLException {
+
+	String deleteQuery = "DELETE FROM employees WHERE id = "+id;
+
+	statement.executeUpdate(deleteQuery);
+
+	System.out.println("Data deleted successfully.");
+
+	}}
+
+===================
+
+
+
+
+
+
+
+
+
+
+2nd program
+-----------
+package com.jdbc;
+ 
+import java.sql.Connection;
+import java.sql.DatabaseMetaData;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+ 
+public class DatabaseMetaDataExample {
+    public static void main(String[] args) {
+        String url = "jdbc:mysql://localhost:3306/wipro_test";
+        String username = "root";
+        String password = "rps@2345";
+ 
+        try {
+            // Load the JDBC driver (for MySQL)
+            Class.forName("com.mysql.cj.jdbc.Driver");
+ 
+            // Establish the connection
+            Connection connection = DriverManager.getConnection(url, username, password);
+ 
+            // Get DatabaseMetaData
+            DatabaseMetaData dbMetaData = connection.getMetaData();
+ 
+            // Retrieve database information
+            String databaseProductName = dbMetaData.getDatabaseProductName();
+            String databaseProductVersion = dbMetaData.getDatabaseProductVersion();
+            String driverName = dbMetaData.getDriverName();
+            String driverVersion = dbMetaData.getDriverVersion();
+ 
+            System.out.println("Database Product Name: " + databaseProductName);
+            System.out.println("Database Product Version: " + databaseProductVersion);
+            System.out.println("Driver Name: " + driverName);
+            System.out.println("Driver Version: " + driverVersion);
+ 
+            // List tables in the database
+            ResultSet tables = dbMetaData.getTables(null, null, "%", new String[]{"TABLE"});
+            System.out.println("\nTables in the database:");
+            while (tables.next()) {
+                String tableName = tables.getString("TABLE_NAME");
+                System.out.println("Table: " + tableName);
+            }
+ 
+            // Close the resources
+            tables.close();
+            connection.close();
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}
+=============
+
+
+
+
+3rd program
+----------
+package com.jdbc;
+ 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+ 
+public class JDBCUsingPreparedStatement {
+    public static void main(String[] args) {
+        String url = "jdbc:mysql://localhost:3306/wipro_test";
+        String username = "root";
+        String password = "rps@2345";
+ 
+        try {
+            // Load the JDBC driver (for MySQL)
+            Class.forName("com.mysql.cj.jdbc.Driver");
+ 
+            // Establish the connection
+            Connection connection = DriverManager.getConnection(url, username, password);
+ 
+            // Use PreparedStatement
+            usePreparedStatement(connection);
+ System.out.println("Table created successfully");
+            // Close the connection
+            connection.close();
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+    }
+ 
+    private static void usePreparedStatement(Connection connection) throws SQLException {
+        String sql = "SELECT * FROM user WHERE username = ? AND status = ?";
+        // Create a PreparedStatement
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        // Set the parameters
+        preparedStatement.setString(1, "john_doe"); // Set username
+        preparedStatement.setString(2, "active");   // Set status
+ 
+        // Execute the query
+        ResultSet resultSet = preparedStatement.executeQuery();
+ 
+        // Process the result set
+        while (resultSet.next()) {
+            int id = resultSet.getInt("id");
+            String username = resultSet.getString("username");
+            String email = resultSet.getString("email");
+            String status = resultSet.getString("status");
+ 
+            // Print the data
+            System.out.println("ID: " + id + ", Username: " + username + ", Email: " + email + ", Status: " + status);
+        }
+ 
+        // Close the ResultSet and PreparedStatement
+        resultSet.close();
+        preparedStatement.close();
+    }
+}
+=================
+
+
+
+
+4th
+----
+package com.jdbc;
+ 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+ 
+public class ResultSetMetaDataExample {
+    public static void main(String[] args) {
+        String url = "jdbc:mysql://localhost:3306/wipro_test";
+        String username = "root";
+        String password = "rps@2345";
+ 
+        try {
+            // Load the JDBC driver (for MySQL)
+            Class.forName("com.mysql.cj.jdbc.Driver");
+ 
+            // Establish the connection
+            Connection connection = DriverManager.getConnection(url, username, password);
+ 
+            // Prepare and execute a query
+            String sql = "SELECT * FROM user";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+ 
+            // Get ResultSetMetaData
+            ResultSetMetaData rsMetaData = resultSet.getMetaData();
+ 
+            // Retrieve column information
+            int columnCount = rsMetaData.getColumnCount();
+            System.out.println("Number of Columns: " + columnCount);
+ 
+            for (int i = 1; i <= columnCount; i++) {
+                String columnName = rsMetaData.getColumnName(i);
+                String columnTypeName = rsMetaData.getColumnTypeName(i);
+                int columnDisplaySize = rsMetaData.getColumnDisplaySize(i);
+                boolean isNullable = rsMetaData.isNullable(i) == ResultSetMetaData.columnNullable;
+ 
+                System.out.println("Column " + i + ": " + columnName);
+                System.out.println(" - Type: " + columnTypeName);
+                System.out.println(" - Display Size: " + columnDisplaySize);
+                System.out.println(" - Nullable: " + isNullable);
+            }
+ 
+            // Close the resources
+            resultSet.close();
+            preparedStatement.close();
+            connection.close();
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+==============
+
+
+
+
+
+5th
+----
+package com.jdbc;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+public class TransactionManagementExample {
+    public static void main(String[] args) {
+        String url = "jdbc:mysql://localhost:3306/wipro_test";
+        String username = "root";
+        String password = "rps@2345";
+
+        Connection connection = null;
+
+        try {
+            // Load the JDBC driver (for MySQL)
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            // Establish the connection
+            connection = DriverManager.getConnection(url, username, password);
+
+            System.out.println("Connected to the database successfully!");
+
+            // Disable auto-commit mode
+            connection.setAutoCommit(false);
+
+            System.out.println("Auto-commit mode disabled. Transaction started.");
+
+            // Perform database operations
+            performDatabaseOperations(connection);
+
+            System.out.println("Database operations completed successfully.");
+
+            // Commit the transaction
+            connection.commit();
+
+            System.out.println("Transaction committed successfully.");
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+            try {
+                if (connection != null) {
+                    // Rollback the transaction in case of an error
+                    connection.rollback();
+
+                    System.out.println("Transaction rolled back due to error.");
+                }
+            } catch (SQLException rollbackEx) {
+                rollbackEx.printStackTrace();
+            }
+        } finally {
+            try {
+                if (connection != null) {
+                    // Re-enable auto-commit mode and close the connection
+                    connection.setAutoCommit(true);
+                    connection.close();
+
+                    System.out.println("Connection closed.");
+                }
+            } catch (SQLException closeEx) {
+                closeEx.printStackTrace();
+            }
+        }
+    }
+
+    private static void performDatabaseOperations(Connection connection) throws SQLException {
+        // Example SQL operations
+        String insertUserSql = "INSERT INTO user (username, email) VALUES (?, ?)";
+        String updateUserSql = "UPDATE user SET email = ? WHERE username = ?";
+
+        try (PreparedStatement insertUserStmt = connection.prepareStatement(insertUserSql);
+             PreparedStatement updateUserStmt = connection.prepareStatement(updateUserSql)) {
+
+            // Insert a new user
+            insertUserStmt.setString(1, "john_doe");
+            insertUserStmt.setString(2, "john.doe@example.com");
+            insertUserStmt.executeUpdate();
+
+            System.out.println("New user inserted successfully.");
+
+            // Update an existing user
+            updateUserStmt.setString(1, "john.newemail@example.com");
+            updateUserStmt.setString(2, "john_doe");
+            updateUserStmt.executeUpdate();
+
+            System.out.println("Existing user updated successfully.");
+        }
+    }
+}
