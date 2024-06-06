@@ -1,0 +1,77 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.Scanner;
+
+public class DaysBetweenDates {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        // Define the date format
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        
+        // Read the first date from the user
+        System.out.println("Enter the first date (yyyy-MM-dd): ");
+        String firstDateString = scanner.nextLine();
+        LocalDate firstDate = LocalDate.parse(firstDateString, formatter);
+        
+        // Read the second date from the user
+        System.out.println("Enter the second date (yyyy-MM-dd): ");
+        String secondDateString = scanner.nextLine();
+        LocalDate secondDate = LocalDate.parse(secondDateString, formatter);
+        
+        // Calculate the number of days between the two dates
+        long daysBetween = ChronoUnit.DAYS.between(firstDate, secondDate);
+        
+        // Output the result
+        System.out.println("Number of days between the two dates: " + daysBetween);
+        
+        scanner.close();
+    }
+}
+
+
+
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
+
+public class TimezoneConverter {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Define the date-time format
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+        // Read the input date-time from the user
+        System.out.println("Enter the date and time (yyyy-MM-dd HH:mm): ");
+        String dateTimeString = scanner.nextLine();
+        LocalDateTime localDateTime = LocalDateTime.parse(dateTimeString, formatter);
+
+        // Read the source timezone from the user
+        System.out.println("Enter the source timezone (e.g., America/New_York): ");
+        String sourceTimeZone = scanner.nextLine();
+        ZoneId sourceZoneId = ZoneId.of(sourceTimeZone);
+
+        // Read the target timezone from the user
+        System.out.println("Enter the target timezone (e.g., Europe/London): ");
+        String targetTimeZone = scanner.nextLine();
+        ZoneId targetZoneId = ZoneId.of(targetTimeZone);
+
+        // Convert the local date-time to the source timezone
+        ZonedDateTime sourceZonedDateTime = ZonedDateTime.of(localDateTime, sourceZoneId);
+
+        // Convert the source timezone date-time to the target timezone
+        ZonedDateTime targetZonedDateTime = sourceZonedDateTime.withZoneSameInstant(targetZoneId);
+
+        // Output the result
+        System.out.println("Source time: " + sourceZonedDateTime.format(formatter) + " " + sourceZoneId);
+        System.out.println("Target time: " + targetZonedDateTime.format(formatter) + " " + targetZoneId);
+
+        scanner.close();
+    }
+}
