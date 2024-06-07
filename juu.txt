@@ -1,0 +1,107 @@
+[3:29 PM] Maria
+package com.test;
+ 
+import static org.junit.jupiter.api.Assertions.*;
+ 
+import org.junit.jupiter.api.Test;
+ 
+class TestCharCount {
+ 
+	@Test
+
+	void test() {
+
+		JunitTesting test=new JunitTesting();
+
+		int output=test.countA("Janani");
+
+	assertEquals(2, output);
+
+	}
+ 
+}
+
+[3:29 PM] Maria
+lll
+[3:29 PM] Maria
+package com.test;
+ 
+import static org.junit.jupiter.api.Assertions.*;
+ 
+import org.junit.jupiter.api.Test;
+ 
+class TestNullCheck {
+ 
+	@Test
+
+	void test() {
+
+		JunitTesting test=new JunitTesting();
+
+		String nullString=null;
+
+		String notNullString="Maria";
+
+		assertNull(nullString);
+
+		//assertNotNull(notNullString);
+
+	}
+ 
+}
+
+[3:30 PM] Maria
+aaa
+[3:30 PM] Maria
+package com.test;
+ 
+import static org.junit.jupiter.api.Assertions.*;
+ 
+import org.junit.jupiter.api.Test;
+ 
+class SquareTest {
+ 
+	@Test
+
+	void test() {
+
+		JunitTesting test=new JunitTesting();
+
+		int output=test.square(5);
+
+		assertEquals(25, output);
+
+	   // assertNotEquals(26, output);
+
+	}
+ 
+}
+
+[3:30 PM] Maria
+aaa
+[3:30 PM] Maria
+package com.test;
+ 
+import static org.junit.jupiter.api.Assertions.*;
+ 
+import org.junit.jupiter.api.Test;
+ 
+class TestNullCheck {
+ 
+	@Test
+
+	void test() {
+
+		JunitTesting test=new JunitTesting();
+
+		String nullString=null;
+
+		String notNullString="Maria";
+
+		assertNull(nullString);
+
+		//assertNotNull(notNullString);
+
+	}
+ 
+}
