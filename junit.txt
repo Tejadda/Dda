@@ -1,0 +1,171 @@
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class MathOperationsTest {
+
+    private MathOperations mathOperations = new MathOperations();
+
+    @Test
+    void testAdd() {
+        assertEquals(4, mathOperations.add(2, 2));
+        assertEquals(-1, mathOperations.add(-2, 1));
+        assertEquals(0, mathOperations.add(0, 0));
+    }
+
+    @Test
+    void testSubtract() {
+        assertEquals(0, mathOperations.subtract(2, 2));
+        assertEquals(-3, mathOperations.subtract(-2, 1));
+        assertEquals(0, mathOperations.subtract(0, 0));
+    }
+
+    @Test
+    void testMultiply() {
+        assertEquals(4, mathOperations.multiply(2, 2));
+        assertEquals(-2, mathOperations.multiply(-2, 1));
+        assertEquals(0, mathOperations.multiply(0, 0));
+    }
+
+    @Test
+    void testDivide() {
+        assertEquals(1, mathOperations.divide(2, 2));
+        assertEquals(-2, mathOperations.divide(-2, 1));
+        assertEquals(Double.POSITIVE_INFINITY, mathOperations.divide(1, 0));
+    }
+}
+============================
+
+
+import org.junit.jupiter.api.After;
+import org.junit.jupiter.api.AfterClass;
+import org.junit.jupiter.api.Before;
+import org.junit.jupiter.api.BeforeClass;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class MathOperationsTest {
+
+    private MathOperations mathOperations;
+
+    @BeforeClass
+    public static void setupClass() {
+        System.out.println("Setting up test class...");
+    }
+
+    @AfterClass
+    public static void tearDownClass() {
+        System.out.println("Tearing down test class...");
+    }
+
+    @Before
+    public void setup() {
+        mathOperations = new MathOperations();
+        System.out.println("Setting up test...");
+    }
+
+    @After
+    public void tearDown() {
+        mathOperations = null;
+        System.out.println("Tearing down test...");
+    }
+
+    @Test
+    void testAdd() {
+        assertEquals(4, mathOperations.add(2, 2));
+        assertEquals(-1, mathOperations.add(-2, 1));
+        assertEquals(0, mathOperations.add(0, 0));
+    }
+
+    @Test
+    void testSubtract() {
+        assertEquals(0, mathOperations.subtract(2, 2));
+        assertEquals(-3, mathOperations.subtract(-2, 1));
+        assertEquals(0, mathOperations.subtract(0, 0));
+    }
+
+    @Test
+    void testMultiply() {
+        assertEquals(4, mathOperations.multiply(2, 2));
+        assertEquals(-2, mathOperations.multiply(-2, 1));
+        assertEquals(0, mathOperations.multiply(0, 0));
+    }
+
+    @Test
+    void testDivide() {
+        assertEquals(1, mathOperations.divide(2, 2));
+        assertEquals(-2, mathOperations.divide(-2, 1));
+        assertEquals(Double.POSITIVE_INFINITY, mathOperations.divide(1, 0));
+    }
+}
+===========
+
+
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+
+public class StringUtilityTest {
+
+    @Test
+    void testIsEmpty() {
+        assertTrue(StringUtility.isEmpty(null));
+        assertTrue(StringUtility.isEmpty(""));
+        assertFalse(StringUtility.isEmpty("hello"));
+    }
+
+    @Test
+    void testIsNotEmpty() {
+        assertFalse(StringUtility.isNotEmpty(null));
+        assertFalse(StringUtility.isNotEmpty(""));
+        assertTrue(StringUtility.isNotEmpty("hello"));
+    }
+
+    @Test
+    void testTrim() {
+        assertEquals("", StringUtility.trim(null));
+        assertEquals("", StringUtility.trim(""));
+        assertEquals("hello", StringUtility.trim("   hello   "));
+    }
+
+    @Test
+    void testSubstring() {
+        assertEquals("hello", StringUtility.substring("hello world", 0, 5));
+        assertEquals("world", StringUtility.substring("hello world", 6, 11));
+        assertEquals("", StringUtility.substring("hello world", 12, 15));
+    }
+
+    @Test
+    void testContains() {
+        assertTrue(StringUtility.contains("hello world", "hello"));
+        assertTrue(StringUtility.contains("hello world", "world"));
+        assertFalse(StringUtility.contains("hello world", "foo"));
+    }
+
+    @Test
+    void testStartsWith() {
+        assertTrue(StringUtility.startsWith("hello world", "hello"));
+        assertFalse(StringUtility.startsWith("hello world", "world"));
+    }
+
+    @Test
+    void testEndsWith() {
+        assertTrue(StringUtility.endsWith("hello world", "world"));
+        assertFalse(StringUtility.endsWith("hello world", "hello"));
+    }
+
+    @Test
+    void testReplace() {
+        assertEquals("hello foo", StringUtility.replace("hello bar", "bar", "foo"));
+        assertEquals("hello world", StringUtility.replace("hello world", "foo", "bar"));
+    }
+
+    @Test
+    void testSplit() {
+        String[] result = StringUtility.split("hello,world,foo", ",");
+        assertEquals(3, result.length);
+        assertEquals("hello", result[0]);
+        assertEquals("world", result[1]);
+        assertEquals("foo", result[2]);
+    }
+}
