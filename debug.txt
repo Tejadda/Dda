@@ -1,0 +1,45 @@
+[10:26 AM] Maria
+package com.debug;
+ 
+public class DebuggingExample {
+	
+	public static void main(String[] args) {
+		int a=7;
+		int b=6;
+		int c=add(a,b);
+		System.out.println("The sum is "+c);
+	
+ 
+	}
+public static int add(int a,int b) {
+	int sum=a+b;
+	int d=sub(a,b);
+	return sum;
+ 
+	
+}
+public static int sub(int a,int b) {
+	int sum=a-b;
+	return sum;
+	
+}
+}
+ 
+[10:33 AM] Maria
+aaaa
+[10:33 AM] Maria
+package com.debug;
+ 
+public class TestClass1 {
+ 
+	public static void main(String[] args) {
+ 
+for(int i=0;i<=3;i++) {
+	if(i==2)
+		continue;
+		System.out.println("Hello "+i);
+}
+	}
+ 
+}
+ 
