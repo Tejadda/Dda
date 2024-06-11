@@ -1,0 +1,5 @@
+Assignment 1: Implement a navigation bar using an unordered list with links to different sections of your HTML page. Use CSS to style the list as a horizontal menu and highlight the current page or section.
+Assignment 2: Create a simple HTML page that includes the use of headings, paragraphs, and at least two semantic tags like <article> or <section>. Add a table with data of your choice and a form with fields for a user's name, email, and a submit button.
+Assignment 3: Apply the CSS box model to ensure that your page content has appropriate margins and padding. Create a layout using div tags and style them to arrange content in a multi-column format using floats or flexbox.
+Assignment 4: Enhance the page by adding CSS3 animations to the menu and form elements. Also, use media queries to make the page responsive, ensuring it looks good on both desktop and mobile screen sizes.
+Assignment 5: Take the static HTML page from Day 1 and integrate Bootstrap. Refactor the navigation bar, table, and form to use Bootstrap components. Ensure the page is responsive using Bootstrap's grid system.
