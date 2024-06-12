@@ -1,0 +1,207 @@
+[10:14 AM] Maria
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="css/style.css" type="text/css">    
+    <title>Document</title>
+    <!--Javascript and css-->
+ 
+</head>
+<body>
+    <!-- Block Elements - h,p,div,li -->
+    <!--  Inline Elements a,img,span,strong,em -->
+    <!--Layout Tags  - Layout tags help structure the layout of a web page.
+    They define sections and containers to organize content effectively.  -->
+    <!--Semantic  Tags -  Semantic HTML tags provide meaning to the content they enclose. They help search engines and other tools understand the structure of the web page.
+    -->
+    <!-- Layout tags - div,header,footer,section,span,article,aside,nav-->
+    <!-- Semantic tags - main,figure,figcaption,mark,time,address,details,summary-->
+ 
+<!-- Structural tags -->
+    <h1>Maria's Training</h1>
+    <h2>Heading 2</h2>
+    <h3>Heading 3</h3>
+    <h4>Heading 4</h4>
+    <h5>Heading 5</h5>
+    <h6>Heading 6</h6>
+    <p><i>This</i> is a <b>paragraph</b></p>  
+    <div>
+        <p>Have any questions? <a href="https://www.google.com/" target="_blank">Contact us</a></p>
+    </div>
+    <p>a<sup>3</sup></p>
+    <p>h<sub>2</sub>o</p>
+    <p class="greentext">
+        hello,<br/>
+            I am a software developer.
+        <hr/>
+    </p>
+    <!-- Structural Marker -->
+    <p><strong>Consult your doctor</strong><br/>
+        <em>Do not</em> try this at home
+    </p>
+    <p>
+        <q>The ability to observe without evaluating is the highest form of intelligence </q>
+        - Jiddu Krishnamurti
+        <blockquote>used to mention the large Quotes</blockquote>
+        <abbr>ISRO</abbr> <br />
+        <cite>The future of the mind </cite> by Michio Kaku<br />
+        <dfn><span>Democracy is a system of government</span>  by the whole population or all the eligible members of a state, typically through elected representatives.</dfn><br />
+        <address>abc@gmail.com</address>
+        <p><del>$599</del><ins>now $400</ins></p>
+        <s>Old number 999887767</s>
+    </p>
+    <h3 class="bluetext">List of Ingredients</h3>
+    <ul>
+        <li>Onion</li>
+        <li>Tomato</li>
+        <li>Ginger</li>
+    </ul>
+    <h3>Camping CheckList</h3>
+    <ol start="1">
+ 
+        <li>Tent</li>
+        <li>Sleeping bag</li>
+        <li>Flashlight</li>
+        <li>Food items</li>
+        <ul>
+            <li>Fruits</li>
+            <li>Snacks</li>
+        </ul>
+    </ol>
+    <div id="tria">
+        <h3 class="bluetext">Types of Triangles</h3>
+        <dl>
+            <dt>Equilateral Triangle</dt>
+            <dd>A triangle is considered to be an equilateral triangle when all three sides have the same length</dd>
+            <dt>Isosceles triangle</dt>
+            <dd>When two sides of a triangle are equal or congruent, then it is called an isosceles triangle</dd>
+            <dt>Scalene triangle</dt>
+            <dd> When none of the sides of a triangle are equal, it is called a scalene triangle.</dd>
+        </dl>
+    </div>
+    <p>&copy</p>
+    <p>This is a <mark>highlighted</mark> word.</p>
+ 
+    <iframe src="formdemo.html" frameborder="0"></iframe>
+ 
+<br/>
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d241316.67292644485!2d72.71637190093986!3d19.08250200590925!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c6306644edc1%3A0x5da4ed8f8d648c69!2sMumbai%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1718166507410!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+ 
+     
+    <!-- mp3: safari 5+, chrome 6+, IE9
+         ogg: Firefox 3.6, Chrome 6, IE9 -->
+         <br/>
+ 
+    <audio controls loop preload="auto">
+        <source src="media/song.mp3">
+        Vellai pookal Song - format not supported by browser
+    </audio>
+ 
+    <video controls height="300" width="300" muted >
+        <source src="media/SampleVideo.mp4" type="video/mp4">
+        <p>Video format not supported by your browser</p>
+    </video>
+ 
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/Kl77yEY5ErU?si=tq6HtnZ3SMdWveHS" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>        
+ 
+    </iframe>
+ 
+    </body>
+</html>
+<!-- Try Links, Images,Tables,Forms on your own-->
+ <!--css- How to choose colours ,font size,colour-->
+  <!-- How to style list,table,forms,-->
+ 
+  <!-- Css- Selectors,Properties and values-->
+   <!-- Attribute and element-->
+[10:14 AM] Maria
+pppp
+[10:14 AM] Maria
+body{
+    font-family:Georgia,'Times New Roman',Serif;
+    /* 1/125th of an inch */
+    font-size: 1.5em;
+}
+h1,h2{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:1em;
+    font-weight:normal;
+    font-style:italic;
+    font-stretch:extra-expanded;
+    text-transform: uppercase;
+    text-decoration:none;
+    letter-spacing:.1em;
+    word-spacing: .5em;
+    border:3px solid black;
+    width:200px;
+   
+}
+ 
+p{
+    line-height: 1.5em;
+    text-align: justify;
+    /* text-indent:50px; */
+    /* border:1px solid black; */
+    /* border-width:10px; */
+    /* border-top-width:7px;
+    border-bottom-width:3px; */
+    /* border-style:solid dashed; */
+    /* border-top-style:double; */
+    /* border-color:black; */
+    width:400px;
+    /* max-height:300px;
+    overflow:scroll; */
+    background-color: antiquewhite;
+    /* text-shadow: 2px 2px 2px gray; */
+    padding:15px;
+    margin:20px auto 20px auto;
+    /* border: 1px solid black;
+    border-radius:80px 50px;
+    -moz-border-raius:80px 50px;
+    -webkit-border-radius:80px 50px;
+ 
+    box-shadow:10px 10px 10px gray;
+    -moz-box-shadow:10px 10px 10px gray;
+    -webkit-box-shadow: 10px 10px 5px 20px gray; */
+   
+    border:30px solid;
+    border-image:url("/media/border.png") 30 round;
+}
+ 
+.paradiv{
+    max-width:1500px;
+    min-width:700px;
+    border:1px solid blue;
+   
+}
+ 
+li{
+    display:inline-block;
+    margin:10px;
+}
+ 
+.coming-soon{
+    visibility:hidden;
+}
+a:link {
+   
+    color:blue;
+    border:1px solid black;
+}
+ 
+a:visited {
+    color:brown;
+}
+ 
+a:hover{
+    color:pink;
+}
+ 
+a:focus{
+    color:green;
+}
+a:active{
+    color:deeppink;
+}
+ 
+ 
