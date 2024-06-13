@@ -1,0 +1,176 @@
+class Employee {
+    // Private fields
+    #name;
+    #age;
+ 
+    // Static field
+    static company = 'Tech Corp';
+ 
+    // Constructor
+    constructor(name, age) {
+        this.#name = name;
+        this.#age = age;
+    }
+ 
+    // Getter for name
+    get name() {
+        return this.#name;
+    }
+// ==(value check) ===(type check)
+    // Setter for name
+    set name(newName) {
+        if (typeof newName === 'string' && newName.length > 0) {
+            this.#name = newName;
+        } else {
+            console.error('Invalid name');
+        }
+    }
+ 
+    // Getter for age
+    get age() {
+        return this.#age;
+    }
+ 
+    // Setter for age
+    set age(newAge) {
+        if (Number.isInteger(newAge) && newAge > 0) {
+            this.#age = newAge;
+        } else {
+            console.error('Invalid age');
+        }
+    }
+ 
+    // Method
+    describe() {
+        console.log(`Employee: ${this.#name}, Age: ${this.#age}`);
+    }
+ 
+    // Static method
+    static companyInfo() {
+        console.log(`Company: ${Employee.company}`);
+    }
+ 
+    // Private method
+    #privateMethod() {
+        console.log('This is a private method.');
+    }
+ 
+    // Method to demonstrate access to private method
+    publicMethod() {
+        this.#privateMethod();
+    }
+}
+ 
+// Creating an instance of the class
+const emp1 = new Employee('Alice', 30);
+ 
+// Accessing static method
+Employee.companyInfo(); // Output: Company: Tech Corp
+ 
+// Accessing instance methods
+emp1.describe(); // Output: Employee: Alice, Age: 30
+ 
+// Using getter and setter
+console.log(emp1.name); // Output: Alice
+emp1.name = 'Bob';
+console.log(emp1.name); // Output: Bob
+ 
+console.log(emp1.age); // Output: 30
+emp1.age = 35;
+console.log(emp1.age); // Output: 35
+ 
+// Attempting to set invalid values
+emp1.name = ''; // Output: Invalid name
+emp1.age = -5; // Output: Invalid age
+ 
+// Accessing public method which in turn accesses private method
+emp1.publicMethod(); // Output: This is a private method.
+ 
+ 
+ 
+ 
+ 
+ 
+/*
+Private Fields:
+Private fields are defined with the # prefix and can only
+be accessed within the class.
+#name;
+#age;
+ 
+Static Field:
+Static fields are defined using the static keyword.
+They are shared among all instances of the class.
+static company = 'Tech Corp';
+ 
+Constructor:
+The constructor method is used to initialize the instance
+properties.
+constructor(name, age) {
+    this.#name = name;
+    this.#age = age;
+}
+ 
+Getter and Setter:
+Getters and setters allow controlled access and modification
+of private fields.
+ 
+get name() {
+    return this.#name;
+}
+ 
+set name(newName) {
+    if (typeof newName === 'string' && newName.length > 0) {
+        this.#name = newName;
+    } else {
+        console.error('Invalid name');
+    }
+}
+ 
+Instance Methods:
+Methods that operate on instances of the class.
+describe() {
+    console.log(`Employee: ${this.#name}, Age: ${this.#age}`);
+}
+ 
+Static Methods:
+Methods that operate on the class itself rather than instances.
+static companyInfo() {
+    console.log(`Company: ${Employee.company}`);
+}
+ 
+Private Methods:
+Private methods are also defined with the # prefix and can
+only be called within the class.
+#privateMethod() {
+    console.log('This is a private method.');
+}
+*/
+has context menu
+
+[11:17 AM] Maria
+// Importing named exports
+import { add, subtract } from './math.js';
+ 
+// Importing default export
+import pi from './math.js';
+ 
+console.log('This is main class and the methods are exported from math.js');
+console.log(add(2, 3));        // Output: 5
+console.log(subtract(5, 3));   // Output: 2
+console.log(pi);               // Output: 3.14159
+[11:17 AM] Maria
+aaaa
+[11:17 AM] Maria
+// Named export
+export function add(a, b) {
+    return a + b;
+}
+ 
+export function subtract(a, b) {
+    return a - b;
+}
+ 
+// Default export
+const pi = 3.14159;
+export default pi;
