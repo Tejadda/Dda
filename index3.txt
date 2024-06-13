@@ -1,0 +1,105 @@
+[3:53 PM] Maria
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Manipulation Example</title>
+</head>
+<body>
+    <div id="content">
+        <p class="text">This is a paragraph.</p>
+    </div>
+    <button id="changeButton">Change Content</button>
+    <button id="addButton">Add Paragraph</button>
+ 
+    <script>
+        document.getElementById('changeButton').addEventListener('click', function() {
+            var paragraph = document.querySelector('.text');
+            paragraph.textContent = 'The content has been changed!';
+        });
+ 
+        document.getElementById('addButton').addEventListener('click', function() {
+            var newParagraph = document.createElement('p');
+            newParagraph.textContent = 'This is a new paragraph.';
+            document.getElementById('content').appendChild(newParagraph);
+        });
+    </script>
+</body>
+</html>
+[3:53 PM] Maria
+aaaa
+[3:53 PM] Maria
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Manipulation Example</title>
+</head>
+<body>
+    <div id="content">
+        <p class="text">This is a paragraph.</p>
+    </div>
+    <button id="changeButton">Change Content</button>
+    <button id="addButton">Add Paragraph</button>
+ 
+    <script>
+        document.getElementById('changeButton').addEventListener('click', function() {
+            var paragraph = document.querySelector('.text');
+            paragraph.textContent = 'The content has been changed!';
+        });
+ 
+        document.getElementById('addButton').
+        addEventListener('click', function() {
+            var newParagraph = document.createElement('p');
+            newParagraph.textContent = 'This is a new paragraph.';
+            document.getElementById('content').appendChild(newParagraph);
+        });
+    </script>
+</body>
+</html>
+[4:06 PM] Maria
+regex
+[4:06 PM] Maria
+Javascript
+[4:07 PM] Maria
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Email Validation</title>
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Email Validation Form</h1>
+    <form id="emailForm">
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email">
+        <button type="button" onclick="validateEmail()"> Submit </button>
+    </form>
+    <p id="message" class="error"></p>
+ 
+    <script>
+        // Regular expression for validating email    
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+ 
+        // Function to validate the email format
+        function validateEmail() {
+            const emailInput = document.getElementById('email').value;
+            const messageElement = document.getElementById('message');
+ 
+            if (emailRegex.test(emailInput)) {
+                messageElement.textContent = 'Email format is correct.';
+                messageElement.style.color = 'green';
+            } else {
+                messageElement.textContent = 'Invalid email format. Please enter a valid email address.';
+                messageElement.style.color = 'red';
+            }
+        }
+    </script>
+</body>
+</html>
