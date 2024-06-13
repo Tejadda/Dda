@@ -1,0 +1,55 @@
+Manipulating the Document Object Model (DOM) in JavaScript is a 
+fundamental skill for web development. 
+The DOM represents the structure of a web page, and JavaScript
+can be used to interact with and modify this structure dynamically.
+ 
+Using getElementById: Selects a single element by its ID.
+var element = document.getElementById('elementId');
+ 
+Using getElementsByClassName: Selects multiple elements by their
+class name.
+var elements = document.getElementsByClassName('className');
+ 
+ 
+Using querySelector: Selects the first element that matches a
+CSS selector.
+var element = document.querySelector('.className')
+ 
+Using querySelectorAll: Selects all elements that match a CSS 
+selector. 
+var elements = document.querySelectorAll('.className');
+ 
+ 
+Modifying Elements
+ 
+Changing Content:
+element.innerHTML = 'New content';
+element.textContent = 'New content';
+ 
+Changing Attributes:
+element.setAttribute('attributeName', 'attributeValue');
+element.getAttribute('attributeName');
+element.removeAttribute('attributeName');
+ 
+Changing Styles:
+element.style.propertyName = 'value';
+ 
+ 
+refer ->Creating and Appending Elements
+ 
+ 
+Event Handling
+--------------
+Adding an Event Listener:
+element.addEventListener('click', function(event) {
+    // Handle the event
+});
+ 
+Removing an Event Listener:
+ 
+element.removeEventListener('click', function(event) {
+    // Handle the event
+});
+ 
+ 
+has context menu
