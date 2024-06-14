@@ -1,0 +1,4 @@
+Day 2: JavaScript/Bootstrap - Responsive Dashboard for Policy Management
+Task 1: Create a dashboard layout with Bootstrap ensuring responsiveness across devices.
+Task 2: Utilize Bootstrap's JavaScript components like tabs and modals to enrich the policy management interface.
+Task 3: Enhance dashboard interactivity with JavaScript for policy sorting and detailed views.
