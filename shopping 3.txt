@@ -1,0 +1,39 @@
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class CustomerService {
+    private Queue<String> requests;
+
+    public CustomerService() {
+        this.requests = new LinkedList<>();
+    }
+
+    public void addRequest(String request) {
+        requests.add(request);
+    }
+
+    public void processRequests() {
+        while (!requests.isEmpty()) {
+            System.out.println("Processing request: " + requests.poll());
+        }
+    }
+
+    public void viewPendingRequests() {
+        System.out.println("Pending requests:");
+        for (String request : requests) {
+            System.out.println(request);
+        }
+    }
+
+    public static void main(String[] args) {
+        CustomerService service = new CustomerService();
+
+        // Add some customer service requests
+        service.addRequest("Request 1");
+        service.addRequest("Request 2");
+        service.addRequest("Request 3");
+
+        // View pending requests
+        service.viewPendingRequests();
+    }
+}
