@@ -1,0 +1,141 @@
+// Book class
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+class Book implements Comparable<Book> {
+    private String title;
+    private String author;
+    private String ISBN;
+
+    public Book(String title, String author, String ISBN) {
+        this.title = title;
+        this.author = author;
+        this.ISBN = ISBN;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public String getISBN() {
+        return ISBN;
+    }
+
+    @Override
+    public int compareTo(Book other) {
+        return this.title.compareTo(other.title);
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", ISBN='" + ISBN + '\'' +
+                '}';
+    }
+}
+
+// Library class
+class Library {
+    private List<Book> books;
+
+    public Library() {
+        this.books = new ArrayList<>();
+    }
+
+    public void addBook(Book book) {
+        int index = Collections.binarySearch(books, book);
+        if (index < 0) {
+            index = -(index + 1);
+        }
+        books.add(index, book);
+    }
+
+    public void removeBook(Book book) {
+        books.remove(book);
+    }
+
+    public Book linearSearch(String title) {
+        for (Book book : books) {
+            if (book.getTitle().equals(title)) {
+                return book;
+            }
+        }
+        return null;
+    }
+
+    public Book binarySearch(String title) {
+        int index = Collections.binarySearch(books, new Book(title, "", ""));
+        if (index >= 0) {
+            return books.get(index);
+        }
+        return null;
+    }
+
+    public void displayBooks() {
+        for (Book book : books) {
+            System.out.println(book);
+        }
+    }
+}
+
+// Library Management System
+public class Main {
+    public static void main(String[] args) {
+        Library library = new Library();
+
+        // Adding books to the library
+        library.addBook(new Book("Book1", "Author1", "ISBN1"));
+        library.addBook(new Book("Book2", "Author2", "ISBN2"));
+        library.addBook(new Book("Book3", "Author3", "ISBN3"));
+
+        // Display all books
+        System.out.println("All books:");
+        library.displayBooks();
+
+        // Linear Search
+        long startTime = System.nanoTime();
+        Book book = library.linearSearch("Book2");
+        long endTime = System.nanoTime();
+        if (book!= null) {
+            System.out.println("Linear Search found: " + book);
+        } else {
+            System.out.println("Linear Search not found");
+        }
+        System.out.println("Linear Search time: " + (endTime - startTime) + " ns");
+
+        // Binary Search
+        startTime = System.nanoTime();
+        book = library.binarySearch("Book2");
+        endTime = System.nanoTime();
+        if (book!= null) {
+            System.out.println("Binary Search found: " + book);
+        } else {
+            System.out.println("Binary Search not found");
+        }
+        System.out.println("Binary Search time: " + (endTime - startTime) + " ns");
+
+        // Compare search performance – linear & binary
+        int numIterations = 1000;
+        long linearTime = 0;
+        long binaryTime = 0;
+        for (int i = 0; i < numIterations; i++) {
+            startTime = System.nanoTime();
+            library.linearSearch("Book2");
+            endTime = System.nanoTime();
+            linearTime += (endTime - startTime);
+
+            startTime = System.nanoTime();
+            library.binarySearch("Book2");
+            endTime = System.nanoTime();
+            binaryTime += (endTime - startTime);
+        }
+        System.out.println("Average Linear Search time: " + (linearTime / numIterations) + " ns");
+        System.out.println("Average Binary Search time: " + (binaryTime / numIterations) + " ns");
+    }
+}

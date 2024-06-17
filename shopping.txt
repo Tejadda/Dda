@@ -1,0 +1,109 @@
+import java.util.LinkedList;
+
+public class ShoppingCart {
+    private LinkedList<String> cart;
+
+    public ShoppingCart() {
+        this.cart = new LinkedList<>();
+    }
+
+    public void addItem(String item) {
+        cart.add(item);
+    }
+
+    public void removeItem(String item) {
+        cart.remove(item);
+    }
+
+    public void viewCart() {
+        for (String item : cart) {
+            System.out.println(item);
+        }
+    }
+}
+=================
+import java.util.Stack;
+
+public class PurchaseHistory {
+    private Stack<LinkedList<String>> history;
+
+    public PurchaseHistory() {
+        this.history = new Stack<>();
+    }
+
+    public void saveCart(LinkedList<String> cart) {
+        history.push(cart);
+    }
+
+    public void undoLastPurchase() {
+        if (!history.isEmpty()) {
+            history.pop();
+        }
+    }
+
+    public void viewHistory() {
+        for (LinkedList<String> cart : history) {
+            for (String item : cart) {
+                System.out.println(item);
+            }
+            System.out.println("-----");
+        }
+    }
+}
+=============
+import java.util.Queue;
+import java.util.LinkedList;
+
+public class CustomerService {
+    private Queue<String> serviceRequests;
+
+    public CustomerService() {
+        this.serviceRequests = new LinkedList<>();
+    }
+
+    public void addRequest(String request) {
+        serviceRequests.add(request);
+    }
+
+    public void processRequests() {
+        while (!serviceRequests.isEmpty()) {
+            System.out.println("Processing request: " + serviceRequests.poll());
+        }
+    }
+
+    public void viewPendingRequests() {
+        for (String request : serviceRequests) {
+            System.out.println(request);
+        }
+    }
+}
+============
+public class ShoppingApp {
+    public static void main(String[] args) {
+        ShoppingCart cart = new ShoppingCart();
+        PurchaseHistory history = new PurchaseHistory();
+        CustomerService service = new CustomerService();
+
+        // Shopping cart operations
+        cart.addItem("Product 1");
+        cart.addItem("Product 2");
+        cart.viewCart();
+
+        // Save cart to purchase history
+        history.saveCart((LinkedList<String>) cart.cart.clone());
+
+        // Undo last purchase
+        history.undoLastPurchase();
+
+        // View purchase history
+        history.viewHistory();
+
+        // Customer service requests
+        service.addRequest("Request 1");
+        service.addRequest("Request 2");
+        service.viewPendingRequests();
+
+        // Process customer service requests
+        service.processRequests();
+    }
+}
