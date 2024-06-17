@@ -1,0 +1,144 @@
+// Book class
+import java.util.*;
+class Book implements Comparable<Book> {
+    private String title;
+    private String author;
+    private String ISBN;
+
+    public Book(String title, String author, String ISBN) {
+        this.title = title;
+        this.author = author;
+        this.ISBN = ISBN;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public String getISBN() {
+        return ISBN;
+    }
+
+    @Override
+    public int compareTo(Book other) {
+        return this.title.compareTo(other.title);
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", ISBN='" + ISBN + '\'' +
+                '}';
+    }
+}
+
+// Library class
+class Library {
+    private List<Book> books;
+
+    public Library() {
+        this.books = new ArrayList<>();
+    }
+
+    public void addBook(Book book) {
+        books.add(book);
+        Collections.sort(books);
+    }
+
+    public void removeBook(Book book) {
+        books.remove(book);
+    }
+
+    public Book linearSearch(String title) {
+        for (Book book : books) {
+            if (book.getTitle().equals(title)) {
+                return book;
+            }
+        }
+        return null;
+    }
+
+    public Book binarySearch(String title) {
+        int low = 0;
+        int high = books.size() - 1;
+
+        while (low <= high) {
+            int mid = (low + high) / 2;
+            Book midBook = books.get(mid);
+
+            if (midBook.getTitle().equals(title)) {
+                return midBook;
+            } else if (midBook.getTitle().compareTo(title) < 0) {
+                low = mid + 1;
+            } else {
+                high = mid - 1;
+            }
+        }
+        return null;
+    }
+
+    public void displayBooks() {
+        for (Book book : books) {
+            System.out.println(book.toString());
+        }
+    }
+}
+
+// Library Management System
+public class Main {
+    public static void main(String[] args) {
+        Library library = new Library();
+
+        // Adding books to the library
+        library.addBook(new Book("Book1", "Author1", "ISBN1"));
+        library.addBook(new Book("Book2", "Author2", "ISBN2"));
+        library.addBook(new Book("Book3", "Author3", "ISBN3"));
+        library.addBook(new Book("Book4", "Author4", "ISBN4"));
+        library.addBook(new Book("Book5", "Author5", "ISBN5"));
+
+        // Display all books
+        System.out.println("All books:");
+        library.displayBooks();
+
+        // Linear Search
+        long startTime = System.nanoTime();
+        Book linearSearchResult = library.linearSearch("Book3");
+        long endTime = System.nanoTime();
+        long linearSearchTime = endTime - startTime;
+
+        if (linearSearchResult!= null) {
+            System.out.println("Linear Search result: " + linearSearchResult.toString());
+        } else {
+            System.out.println("Book not found using Linear Search");
+        }
+        System.out.println("Linear Search time: " + linearSearchTime + " nanoseconds");
+
+        // Binary Search
+        startTime = System.nanoTime();
+        Book binarySearchResult = library.binarySearch("Book3");
+        endTime = System.nanoTime();
+        long binarySearchTime = endTime - startTime;
+
+        if (binarySearchResult!= null) {
+            System.out.println("Binary Search result: " + binarySearchResult.toString());
+        } else {
+            System.out.println("Book not found using Binary Search");
+        }
+        System.out.println("Binary Search time: " + binarySearchTime + " nanoseconds");
+
+        // Compare search performance
+        System.out.println("Linear Search time: " + linearSearchTime + " nanoseconds");
+        System.out.println("Binary Search time: " + binarySearchTime + " nanoseconds");
+        if (linearSearchTime > binarySearchTime) {
+            System.out.println("Binary Search is faster");
+        } else {
+            System.out.println("Linear Search is faster");
+        }
+    }
+}
