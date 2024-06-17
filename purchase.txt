@@ -1,0 +1,95 @@
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Stack;
+
+class ShoppingCart {
+    LinkedList<String> cart;
+
+    public ShoppingCart() {
+        this.cart = new LinkedList<>();
+    }
+
+    public void addItem(String item) {
+        cart.add(item);
+    }
+
+    public void removeItem(String item) {
+        cart.remove(item);
+    }
+
+    public void viewCart() {
+        System.out.println("Items in cart: " + cart);
+    }
+}
+
+class PurchaseHistory {
+    private Stack<LinkedList<String>> history;
+
+    public PurchaseHistory() {
+        this.history = new Stack<>();
+    }
+
+    public void saveCart(LinkedList<String> cart) {
+        history.push(cart);
+    }
+
+    public void undoLastPurchase() {
+        if (!history.isEmpty()) {
+            history.pop();
+        }
+    }
+
+    public void viewHistory() {
+        System.out.println("Purchase history: " + history);
+    }
+}
+
+class CustomerService {
+    private Queue<String> serviceRequests;
+
+    public CustomerService() {
+        this.serviceRequests = new LinkedList<>();
+    }
+
+    public void addRequest(String request) {
+        serviceRequests.add(request);
+    }
+
+    public void processRequests() {
+        while (!serviceRequests.isEmpty()) {
+            System.out.println("Processing request: " + serviceRequests.poll());
+        }
+    }
+
+    public void viewPendingRequests() {
+        System.out.println("Pending requests: " + serviceRequests);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        ShoppingCart cart = new ShoppingCart();
+        PurchaseHistory history = new PurchaseHistory();
+        CustomerService service = new CustomerService();
+
+        // Shopping cart operations
+        cart.addItem("Item 1");
+        cart.addItem("Item 2");
+        cart.viewCart();
+        cart.removeItem("Item 1");
+        cart.viewCart();
+
+        // Purchase history operations
+        LinkedList<String> cartSnapshot = new LinkedList<>(cart.cart);
+        history.saveCart(cartSnapshot);
+        history.viewHistory();
+        history.undoLastPurchase();
+        history.viewHistory();
+
+        // Customer service operations
+        service.addRequest("Request 1");
+        service.addRequest("Request 2");
+        service.viewPendingRequests();
+        service.processRequests();
+    }
+}
