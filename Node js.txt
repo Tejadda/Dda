@@ -1,0 +1,27 @@
+install nodejs from  https://nodejs.org/en
+
+create the a folder and open in Vscode
+
+open the terminal 
+
+run this command --> npm install -g @angular/cli@17
+
+if it was showing error try running this command --> Set-ExecutionPolicy -Scope CurrentUser RemoteSigned -Force
+
+reopen the vscode and try --> npm install -g @angular/cli@17
+
+to check the version --> ng version -->Y
+
+to create project --> ng new WiproTraining --> click enter -->Y
+
+to change the directory -->  cd .\WiproTraining
+
+make the changes in app.components.html file 
+
+to start --> ng serve -->Y (or) npm run start
+
+check the output in browser (http://localhost:4200/)
+
+Ctrl+Q / Ctrl+C --> to close
+
+to get dist folder --> ng build
