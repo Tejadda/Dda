@@ -1,0 +1,28 @@
+[5:17 PM] Maria
+ng new my-angular-app
+[5:17 PM] Maria
+cd my-angular-app
+[5:18 PM] Maria
+ng generate component home or ng g c home
+
+ng generate component about or ng g c about
+[5:26 PM] Maria
+npm run start or ng serve or ng  s -o or
+[5:27 PM] Maria
+npm run start or ng serve or ng  s -o
+
+==================
+
+export const routes: Routes = [
+ 
+    {
+        path:'HomeComponent',
+        component:HomeComponent,
+    },
+    {
+        path:'AboutComponent',
+        component:AboutComponent,
+    },
+];
+================
+npx kill -4200
