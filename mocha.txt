@@ -1,0 +1,111 @@
+[4:25 PM] Maria
+U have to create test.ts unsder src folder
+[4:25 PM] Maria
+// src/test.ts
+import 'zone.js/dist/zone-testing';
+import { getTestBed } from '@angular/core/testing';
+import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
+ 
+declare const require: any;
+ 
+// First, initialize the Angular testing environment.
+getTestBed().initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
+ 
+// Then we find all the tests.
+const context = require.context('./', true, /\.spec\.ts$/);
+ 
+// And load the modules.
+context.keys().map(context);
+[4:28 PM] Maria
+HelloWordComponent.ts
+[4:28 PM] Maria
+// src/app/hello-world/hello-world.component.ts
+import { Component } from '@angular/core';
+ 
+@Component({
+  selector: 'app-hello-world',
+  template: `<h1>{{title}}</h1>`
+})
+export class HelloWorldComponent {
+  title = 'Hello, World!';
+}
+[4:28 PM] Maria
+spec file
+[4:28 PM] Maria
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+ 
+import { HelloWorldComponent } from './hello-world.component';
+ 
+describe('HelloWorldComponent', () => {
+  let component: HelloWorldComponent;
+  let fixture: ComponentFixture<HelloWorldComponent>;
+ 
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [HelloWorldComponent]
+    })
+    .compileComponents();
+   
+    fixture = TestBed.createComponent(HelloWorldComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+ 
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
+ 
+[4:30 PM] Maria
+ng new angular-mocha-chai-app
+
+cd angular-mocha-chai-app
+
+npm install mocha chai chai-as-promised --save-dev
+
+npm install karma-mocha karma-chai --save-dev
+
+To create karma.conf.js ->ng g config karma
+
+To create test.ts ->src/test.ts
+ 
+And We have to write the Test case using Mocha and Chai
+
+1.Create a Component:
+
+ng generate component hello-world
+
+2.Update the Component.ts code
+
+3.Update the Component.spec file
+ 
+To run the test
+
+To run your tests, simply use the Angular CLI's test command:
+
+ng test
+[4:32 PM] Maria
+qqq
+[4:33 PM] Maria
+10% building 3/3 modules 0 active
+
+ℹ ｢wdm｣: Compiled successfully.
+
+12 06 2024 10:00:00.000:INFO [karma-server]: Karma v6.3.9 server started at http://localhost:9876/
+
+12 06 2024 10:00:00.000:INFO [launcher]: Launching browsers Chrome with concurrency 1
+
+12 06 2024 10:00:00.000:INFO [launcher]: Starting browser Chrome
+
+12 06 2024 10:00:05.000:INFO [Chrome 90.0.4430 (Mac OS X 10.15.7)]: Connected on socket xyZabcd12345 with id 12345678
+ output
+========
+  HelloWorldComponent
+
+    ✓ should create the component
+
+    ✓ should have the title "Hello, World!"
+
+    ✓ should render title in a h1 tag
+ 
+  3 passing (30ms)
