@@ -1,0 +1,18 @@
+/ Step 1: Create a new XMLHttpRequest object
+var xhr = new XMLHttpRequest();
+ 
+// Step 2: Configure it to GET data from a URL
+xhr.open('GET', 'https://example.com/api/data', true);
+ 
+// Step 3: Set up a function to handle the response
+xhr.onload = function() {
+    if (xhr.status === 200) {
+        // Step 4: Process the response data
+        var data = JSON.parse(xhr.responseText);
+        document.getElementById('content').innerHTML = data.content;
+    }
+};
+ 
+// Step 5: Send the request
+xhr.send();
+has context menu
