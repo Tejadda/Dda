@@ -1,0 +1,69 @@
+Capstone Project Java 5
+Assignment 3
+Development Scenario: Rent-a-Car Platform
+Overview:
+The Rent-a-Car Platform serves as a comprehensive solution for users to effortlessly schedule and
+manage cab services like trip based, hourly rental, weekend rentals, and pick and drop services. This
+project integrates front-end development with HTML5, CSS3, JavaScript, and Angular, and back-end
+development using Java Core, RESTful APIs, microservices, and incorporates modern design patterns,
+as learned in the previous training programs.
+Day 1: User Interface and Frontend Setup
+Task 1: Set up the Angular project structure and create a basic layout.
+User Story: As a developer, I want to establish a well-organized project structure to ensure smooth
+development and maintenance.
+Task 2: Design a responsive homepage with Bootstrap showcasing various car rental services.
+User Story: As a user, I want an attractive and easy-to-navigate homepage so that I can quickly find
+the services I’m interested in.
+Task 3: Implement a service browsing feature using JavaScript and Angular.
+User Story: As a user, I need the ability to easily browse and filter services to find exactly what I’m
+looking for.
+Task 4: Create an intuitive booking form with Angular’s form handling.
+User Story: As a user, I want to book services through a user-friendly form that guides me and
+validates my input to prevent errors.
+Day 2: Backend Development and API Integration
+Task 1: Initialize an Java Core backend with a SQL database.
+User Story: As a developer, I need a robust backend system to handle and store user and service
+data efficiently.
+Task 2: Develop RESTful APIs for service listings and user bookings.
+User Story: As a frontend developer, I require APIs to connect the frontend functionalities with the
+backend data.
+Task 3: AJAX integration for data fetching and form submission.
+User Story: As a user, I expect a seamless interaction with the platform without unnecessary page
+reloads.
+Task 4: Implement secure user authentication and authorization.
+User Story: As a user, I want my data and bookings to be secure and accessible only through my
+authenticated account.
+
+Day 3: Advanced Features and User Interaction
+Task 1: Add real-time availability checks and dynamic features.
+User Story: As a user, I want to see real-time updates on cab availability to book instantly.
+Task 2: Create components for reviews and ratings.
+User Story: As a user, I want to read and post reviews and ratings to make informed decisions.
+Task 3: Develop a user dashboard for managing bookings.
+User Story: As a user, I need a dashboard to view and manage all my bookings in one place.
+Task 4: Enhance the UI with CSS3 transitions and animations.
+User Story: As a user, I enjoy an engaging and interactive visual experience when using the platform.
+Day 4: Microservices and System Integration
+Task 1: Design a microservices architecture for the platform.
+User Story: As a system architect, I aim to build a scalable and maintainable system using
+microservices.
+Task 2: Containerize the services using Docker.
+User Story: As a DevOps engineer, I want to ensure easy deployment and scalability through
+containerization.
+Task 3: Set up inter-microservice communication.
+User Story: As a backend developer, I need to establish reliable communication channels between
+microservices.
+Task 4: Implement monitoring and logging for microservices.
+User Story: As a system administrator, I want to monitor system health and performance
+effectively.&quot;
+&quot;Day 5: Testing, Deployment, and Documentation
+Task 1: Conduct thorough testing with Mocha, Chai, and Jest.
+User Story: As a QA engineer, I need to ensure the platform is reliable and bug-free before launch.
+Task 2: Deploy the platform to a cloud environment.
+User Story: As a DevOps engineer, I want a smooth deployment process to make the platform
+publicly accessible.
+Task 3: Optimize the application for performance.
+User Story: As a user, I expect a fast and responsive experience when using the platform.
+Task 4: Create comprehensive documentation.
+User Story: As a new developer on the project, I rely on clear documentation for understanding and
+contributing to the platform
