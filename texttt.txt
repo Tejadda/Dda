@@ -1,0 +1,223 @@
+<!-- home.component.html -->
+<div class="container">
+  <h1>Welcome to Rent-a-Car Platform</h1>
+  <!-- Add content for the homepage here -->
+</div>
+=====
+<!-- home.component.html -->
+<div class="container">
+  <h1>Welcome to Rent-a-Car Platform</h1>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card">
+        <img src="car-image1.jpg" alt="Car Image 1">
+        <h2>Trip-Based Rentals</h2>
+        <p>Book a car for a day or a week</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <img src="car-image2.jpg" alt="Car Image 2">
+        <h2>Hourly Rentals</h2>
+        <p>Book a car by the hour</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <img src="car-image3.jpg" alt="Car Image 3">
+        <h2>Weekend Rentals</h2>
+        <p>Book a car for the weekend</p>
+      </div>
+    </div>
+  </div>
+</div>
+============
+
+Task 3: Implement a service browsing feature using JavaScript and Angular.
+
+This task involves creating a service browsing feature using Angular. Here's an example code snippet:
+
+service-browsing.component.ts
+// service-browsing.component.ts
+import { Component, OnInit } from '@angular/core';
+import { Service } from '../service.model';
+
+@Component({
+  selector: 'app-service-browsing',
+  template: `
+    <div class="container">
+      <h2>Service Browsing</h2>
+      <ul>
+        <li *ngFor="let service of services">
+          {{ service.name }}
+        </li>
+      </ul>
+    </div>
+  `
+})
+export class ServiceBrowsingComponent implements OnInit {
+  services: Service[] = [
+    { id: 1, name: 'Trip-Based Rentals' },
+    { id: 2, name: 'Hourly Rentals' },
+    { id: 3, name: 'Weekend Rentals' },
+    { id: 4, name: 'Pick and Drop Services' }
+  ];
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+}
+======
+Java Code for Backend (RESTful API)
+
+Here's an example Java code snippet for the backend RESTful API using Java Core and RESTful APIs:
+
+Service.java (Model)
+
+// Service.java
+public class Service {
+    private int id;
+    private String name;
+
+    // Getters and setters
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+}
+==============
+// ServiceController.java
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+@Path("/services")
+public class ServiceController {
+    private List<Service> services = new ArrayList<>();
+
+    public ServiceController() {
+        services.add(new Service(1, "Trip-Based Rentals"));
+        services.add(new Service(2, "Hourly Rentals"));
+        services.add(new Service(3, "Weekend Rentals"));
+        services.add(new Service(4, "Pick and Drop Services"));
+    }
+
+    @GET
+@Produces(MediaType.APPLICATION_JSON)
+    public List<Service> getServices() {
+        return services;
+    }
+}
+=====
+
+<!-- home.component.html -->
+<div class="container">
+  <h1>Welcome to Rent-a-Car Platform</h1>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card">
+        <img src="car-image1.jpg" alt="Car Image 1">
+        <h2>Trip-Based Rentals</h2>
+        <p>Book a car for a day or a week, perfect for road trips or vacations.</p>
+        <button class="btn btn-primary">Learn More</button>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <img src="car-image2.jpg" alt="Car Image 2">
+        <h2>Hourly Rentals</h2>
+        <p>Book a car by the hour, ideal for short trips or errands.</p>
+        <button class="btn btn-primary">Learn More</button>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <img src="car-image3.jpg" alt="Car Image 3">
+        <h2>Weekend Rentals</h2>
+        <p>Book a car for the weekend, perfect for getaways or special occasions.</p>
+        <button class="btn btn-primary">Learn More</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Why Choose Us?</h2>
+      <ul>
+        <li><i class="fas fa-check-circle"></i> Wide range of cars to choose from</li>
+        <li><i class="fas fa-check-circle"></i> Competitive pricing and discounts</li>
+        <li><i class="fas fa-check-circle"></i> 24/7 customer support</li>
+        <li><i class="fas fa-check-circle"></i> Easy online booking and payment</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Popular Destinations</h2>
+      <div class="owl-carousel owl-theme">
+        <div class="item">
+          <img src="destination-image1.jpg" alt="Destination Image 1">
+          <h3>New York City</h3>
+        </div>
+        <div class="item">
+          <img src="destination-image2.jpg" alt="Destination Image 2">
+          <h3>Los Angeles</h3>
+        </div>
+        <div class="item">
+          <img src="destination-image3.jpg" alt="Destination Image 3">
+          <h3>Chicago</h3>
+        </div>
+        <div class="item">
+          <img src="destination-image4.jpg" alt="Destination Image 4">
+          <h3>Miami</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Testimonials</h2>
+      <div class="testimonial-carousel owl-carousel owl-theme">
+        <div class="item">
+          <p>"I had a great experience with Rent-a-Car Platform. The car was clean and comfortable, and the staff was very helpful."</p>
+          <h4>John Doe</h4>
+        </div>
+        <div class="item">
+          <p>"I was impressed with the wide range of cars available on the platform. The booking process was easy and convenient."</p>
+          <h4>Jane Smith</h4>
+        </div>
+        <div class="item">
+          <p>"The customer support team was very responsive and helpful. I would definitely recommend Rent-a-Car Platform to my friends and family."</p>
+          <h4>Bob Johnson</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Get Started</h2>
+      <p>Ready to book your next car rental? Search for your desired location and dates to get started.</p>
+      <button class="btn btn-primary">Search Cars</button>
+    </div>
+  </div>
+</div>
