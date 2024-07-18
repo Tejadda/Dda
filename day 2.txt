@@ -1,0 +1,343 @@
+Certainly! Let's move on to Day 2 of your project, which focuses on backend development and API integration. I'll provide you with a step-by-step guide to implement the tasks for Day 2.
+Day 2: Backend Development and API Integration
+Task 1: Initialize a Java Core backend with a SQL database.
+
+Set up a new Java project using your preferred IDE (e.g., IntelliJ IDEA, Eclipse).
+Add the necessary dependencies to your project. You can use Maven or Gradle for dependency management. Here's a sample pom.xml for Maven:
+
+xmlCopy<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.rentacar</groupId>
+    <artifactId>rent-a-car-backend</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+    </properties>
+
+    <dependencies>
+        <!-- JDBC for database connection -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.28</version>
+        </dependency>
+        <!-- Jersey for RESTful API -->
+        <dependency>
+            <groupId>org.glassfish.jersey.containers</groupId>
+            <artifactId>jersey-container-servlet</artifactId>
+            <version>2.34</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.inject</groupId>
+            <artifactId>jersey-hk2</artifactId>
+            <version>2.34</version>
+        </dependency>
+        <!-- JSON processing -->
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-json-jackson</artifactId>
+            <version>2.34</version>
+        </dependency>
+    </dependencies>
+</project>
+
+Set up your SQL database. For this example, we'll use MySQL. Create a new database and tables:
+
+sqlCopyCREATE DATABASE rent_a_car;
+USE rent_a_car;
+
+CREATE TABLE services (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    description TEXT,
+    price_per_hour DECIMAL(10, 2) NOT NULL
+);
+
+CREATE TABLE bookings (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    service_id INT,
+    customer_name VARCHAR(100) NOT NULL,
+    customer_email VARCHAR(100) NOT NULL,
+    customer_phone VARCHAR(20) NOT NULL,
+    booking_date DATE NOT NULL,
+    hours INT NOT NULL,
+    FOREIGN KEY (service_id) REFERENCES services(id)
+);
+
+Create a database connection utility class:
+
+javaCopypackage com.rentacar.util;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class DatabaseConnection {
+    private static final String URL = "jdbc:mysql://localhost:3306/rent_a_car";
+    private static final String USER = "your_username";
+    private static final String PASSWORD = "your_password";
+
+    public static Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(URL, USER, PASSWORD);
+    }
+}
+Task 2: Develop RESTful APIs for service listings and user bookings.
+
+Create model classes for Service and Booking:
+
+javaCopypackage com.rentacar.model;
+
+public class Service {
+    private int id;
+    private String name;
+    private String description;
+    private double pricePerHour;
+
+    // Constructors, getters, and setters
+}
+
+public class Booking {
+    private int id;
+    private int serviceId;
+    private String customerName;
+    private String customerEmail;
+    private String customerPhone;
+    private String bookingDate;
+    private int hours;
+
+    // Constructors, getters, and setters
+}
+
+Create DAO (Data Access Object) classes for database operations:
+
+javaCopypackage com.rentacar.dao;
+
+import com.rentacar.model.Service;
+import com.rentacar.util.DatabaseConnection;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class ServiceDAO {
+    public List<Service> getAllServices() throws SQLException {
+        List<Service> services = new ArrayList<>();
+        String query = "SELECT * FROM services";
+        
+        try (Connection conn = DatabaseConnection.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
+            
+            while (rs.next()) {
+                Service service = new Service();
+                service.setId(rs.getInt("id"));
+                service.setName(rs.getString("name"));
+                service.setDescription(rs.getString("description"));
+                service.setPricePerHour(rs.getDouble("price_per_hour"));
+                services.add(service);
+            }
+        }
+        return services;
+    }
+
+    // Add methods for getServiceById, createService, updateService, deleteService
+}
+
+public class BookingDAO {
+    public void createBooking(Booking booking) throws SQLException {
+        String query = "INSERT INTO bookings (service_id, customer_name, customer_email, customer_phone, booking_date, hours) VALUES (?, ?, ?, ?, ?, ?)";
+        
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+            
+            pstmt.setInt(1, booking.getServiceId());
+            pstmt.setString(2, booking.getCustomerName());
+            pstmt.setString(3, booking.getCustomerEmail());
+            pstmt.setString(4, booking.getCustomerPhone());
+            pstmt.setString(5, booking.getBookingDate());
+            pstmt.setInt(6, booking.getHours());
+            
+            pstmt.executeUpdate();
+        }
+    }
+
+    // Add methods for getBookingById, getAllBookings, updateBooking, deleteBooking
+}
+
+Create RESTful API endpoints:
+
+javaCopypackage com.rentacar.api;
+
+import com.rentacar.dao.ServiceDAO;
+import com.rentacar.model.Service;
+
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import java.sql.SQLException;
+import java.util.List;
+
+@Path("/services")
+public class ServiceResource {
+    private ServiceDAO serviceDAO = new ServiceDAO();
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Service> getAllServices() throws SQLException {
+        return serviceDAO.getAllServices();
+    }
+
+    // Add more endpoints for getServiceById, createService, updateService, deleteService
+}
+
+@Path("/bookings")
+public class BookingResource {
+    private BookingDAO bookingDAO = new BookingDAO();
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public void createBooking(Booking booking) throws SQLException {
+        bookingDAO.createBooking(booking);
+    }
+
+    // Add more endpoints for getBookingById, getAllBookings, updateBooking, deleteBooking
+}
+Task 3: AJAX integration for data fetching and form submission.
+
+Update your Angular service to use HttpClient for API calls:
+
+typescriptCopyimport { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class CarServiceService {
+  private apiUrl = 'http://localhost:8080/api'; // Adjust this to your backend URL
+
+  constructor(private http: HttpClient) { }
+
+  getServices(): Observable<CarService[]> {
+    return this.http.get<CarService[]>(`${this.apiUrl}/services`);
+  }
+
+  createBooking(booking: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/bookings`, booking);
+  }
+}
+
+Update your components to use these service methods:
+
+typescriptCopy// In service-list.component.ts
+ngOnInit(): void {
+  this.carService.getServices().subscribe(
+    services => this.services = services,
+    error => console.error('Error fetching services:', error)
+  );
+}
+
+// In booking-form.component.ts
+onSubmit() {
+  if (this.bookingForm.valid) {
+    this.carService.createBooking(this.bookingForm.value).subscribe(
+      response => {
+        console.log('Booking created successfully', response);
+        this.bookingForm.reset();
+      },
+      error => console.error('Error creating booking:', error)
+    );
+  }
+}
+Task 4: Implement secure user authentication and authorization.
+
+For basic authentication, you can use JWT (JSON Web Tokens). Add the following dependency to your pom.xml:
+
+xmlCopy<dependency>
+    <groupId>io.jsonwebtoken</groupId>
+    <artifactId>jjwt</artifactId>
+    <version>0.9.1</version>
+</dependency>
+
+Create a JWTUtil class for token generation and validation:
+
+javaCopypackage com.rentacar.util;
+
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+
+import java.util.Date;
+
+public class JWTUtil {
+    private static final String SECRET_KEY = "your_secret_key";
+    private static final long EXPIRATION_TIME = 864_000_000; // 10 days
+
+    public static String generateToken(String username) {
+        return Jwts.builder()
+                .setSubject(username)
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
+                .signWith(SignatureAlgorithm.HS512, SECRET_KEY)
+                .compact();
+    }
+
+    public static String validateToken(String token) {
+        Claims claims = Jwts.parser()
+                .setSigningKey(SECRET_KEY)
+                .parseClaimsJws(token)
+                .getBody();
+
+        return claims.getSubject();
+    }
+}
+
+Create an authentication endpoint:
+
+javaCopy@Path("/auth")
+public class AuthResource {
+    @POST
+    @Path("/login")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response login(User user) {
+        // Validate user credentials (implement this method)
+        if (isValidUser(user)) {
+            String token = JWTUtil.generateToken(user.getUsername());
+            return Response.ok().entity(new AuthResponse(token)).build();
+        } else {
+            return Response.status(Response.Status.UNAUTHORIZED).build();
+        }
+    }
+}
+
+Implement a JWT filter for securing endpoints:
+
+javaCopy@Provider
+public class JWTFilter implements ContainerRequestFilter {
+    @Override
+    public void filter(ContainerRequestContext requestContext) throws IOException {
+        String authHeader = requestContext.getHeaderString(HttpHeaders.AUTHORIZATION);
+        
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            throw new WebApplicationException(Response.Status.UNAUTHORIZED);
+        }
+        
+        String token = authHeader.substring("Bearer".length()).trim();
+        
+        try {
+            String username = JWTUtil.validateToken(token);
+            // You can add the username to the request context for further use
+            requestContext.setProperty("username", username);
+        } catch (Exception e) {
+            throw new WebApplicationException(Response.Status.UNAUTHORIZED);
+        }
+    }
+}
+This completes the backend development and API integration tasks for Day 2. You now have a basic backend setup with database connectivity, RESTful APIs, and JWT-based authentication. The frontend is also updated to communicate with these APIs.
+Remember to handle errors appropriately, implement proper input validation, and follow security best practices in a production environment. CopyRetry2 / 2Claude does not have the ability to run the code it generates yet.Claude can make mistakes. Please double-check responses.
