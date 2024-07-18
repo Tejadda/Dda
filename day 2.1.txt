@@ -1,0 +1,307 @@
+Certainly! I'll provide you with a basic Spring Boot setup that covers the main aspects of your tasks. This will include a REST API, database integration, and basic security. We'll use Spring Boot, Spring Data JPA for database operations, and Spring Security for authentication.
+First, let's start with the pom.xml file for Maven dependencies:
+xmlCopy<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.7.0</version>
+        <relativePath/>
+    </parent>
+    <groupId>com.example</groupId>
+    <artifactId>service-booking-app</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>service-booking-app</name>
+    <description>Service Booking Application</description>
+    <properties>
+        <java.version>11</java.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.9.1</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>
+Now, let's create the main application class:
+javaCopypackage com.example.servicebookingapp;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class ServiceBookingAppApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(ServiceBookingAppApplication.class, args);
+    }
+}
+Next, let's create the entity classes:
+User.java:
+javaCopypackage com.example.servicebookingapp.model;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "users")
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false, unique = true)
+    private String username;
+
+    @Column(nullable = false)
+    private String password;
+
+    // getters and setters
+}
+Service.java:
+javaCopypackage com.example.servicebookingapp.model;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "services")
+public class Service {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false)
+    private String name;
+
+    @Column(nullable = false)
+    private String description;
+
+    @Column(nullable = false)
+    private double price;
+
+    // getters and setters
+}
+Booking.java:
+javaCopypackage com.example.servicebookingapp.model;
+
+import javax.persistence.*;
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "bookings")
+public class Booking {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "service_id", nullable = false)
+    private Service service;
+
+    @Column(nullable = false)
+    private LocalDateTime bookingTime;
+
+    // getters and setters
+}
+Now, let's create the repositories:
+UserRepository.java:
+javaCopypackage com.example.servicebookingapp.repository;
+
+import com.example.servicebookingapp.model.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.Optional;
+
+public interface UserRepository extends JpaRepository<User, Long> {
+    Optional<User> findByUsername(String username);
+}
+ServiceRepository.java:
+javaCopypackage com.example.servicebookingapp.repository;
+
+import com.example.servicebookingapp.model.Service;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ServiceRepository extends JpaRepository<Service, Long> {
+}
+BookingRepository.java:
+javaCopypackage com.example.servicebookingapp.repository;
+
+import com.example.servicebookingapp.model.Booking;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface BookingRepository extends JpaRepository<Booking, Long> {
+}
+Next, let's implement the security configuration:
+SecurityConfig.java:
+javaCopypackage com.example.servicebookingapp.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.csrf().disable()
+            .authorizeRequests()
+            .antMatchers("/api/auth/**").permitAll()
+            .anyRequest().authenticated()
+            .and()
+            .httpBasic();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+}
+Now, let's create the controllers:
+AuthController.java:
+javaCopypackage com.example.servicebookingapp.controller;
+
+import com.example.servicebookingapp.model.User;
+import com.example.servicebookingapp.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/api/auth")
+public class AuthController {
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @PostMapping("/register")
+    public ResponseEntity<?> registerUser(@RequestBody User user) {
+        if (userRepository.findByUsername(user.getUsername()).isPresent()) {
+            return ResponseEntity.badRequest().body("Username is already taken!");
+        }
+
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
+
+        return ResponseEntity.ok("User registered successfully!");
+    }
+}
+ServiceController.java:
+javaCopypackage com.example.servicebookingapp.controller;
+
+import com.example.servicebookingapp.model.Service;
+import com.example.servicebookingapp.repository.ServiceRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/services")
+public class ServiceController {
+
+    @Autowired
+    private ServiceRepository serviceRepository;
+
+    @GetMapping
+    public List<Service> getAllServices() {
+        return serviceRepository.findAll();
+    }
+
+    @PostMapping
+    public ResponseEntity<Service> createService(@RequestBody Service service) {
+        return ResponseEntity.ok(serviceRepository.save(service));
+    }
+}
+BookingController.java:
+javaCopypackage com.example.servicebookingapp.controller;
+
+import com.example.servicebookingapp.model.Booking;
+import com.example.servicebookingapp.repository.BookingRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/bookings")
+public class BookingController {
+
+    @Autowired
+    private BookingRepository bookingRepository;
+
+    @GetMapping
+    public List<Booking> getAllBookings() {
+        return bookingRepository.findAll();
+    }
+
+    @PostMapping
+    public ResponseEntity<Booking> createBooking(@RequestBody Booking booking) {
+        return ResponseEntity.ok(bookingRepository.save(booking));
+    }
+}
+Finally, let's configure the database connection in application.properties:
+propertiesCopyspring.datasource.url=jdbc:mysql://localhost:3306/service_booking_db
+spring.datasource.username=your_username
+spring.datasource.password=your_password
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL5InnoDBDialect
+This setup provides a basic structure for your service booking application with:
+
+User registration and authentication
+Service listing and creation
+Booking creation and listing
+
+To run this application:
+
+Create a MySQL database named service_booking_db
+Update the application.properties file with your database credentials
+Run the ServiceBookingAppApplication class
+
+This code provides a foundation that you can build upon. You may want to add more features, improve error handling, and implement more sophisticated authentication (like JWT) as you develop your application further.
+Would you like me to explain any part of this code or elaborate on any specific feature?
