@@ -1,0 +1,123 @@
+spring.application.name=eureka-server
+server.port=8761
+eureka.client.register-with-eureka=false
+eureka.client.fetch-registry=false
+
+package com.example.eurekaserver;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
+
+@SpringBootApplication
+@EnableEurekaServer
+public class EurekaServerApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(EurekaServerApplication.class, args);
+    }
+}
+
+
+spring.application.name=api-gateway
+server.port=8080
+eureka.client.service-url.defaultZone=http://localhost:8761/eureka/
+
+package com.example.apigateway;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+
+@SpringBootApplication
+@EnableEurekaClient
+public class ApiGatewayApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(ApiGatewayApplication.class, args);
+    }
+}
+
+spring.cloud.gateway.routes[0].id=service-route
+spring.cloud.gateway.routes[0].uri=http://localhost:8081
+spring.cloud.gateway.routes[0].predicates[0]=Path=/api/**
+
+FROM openjdk:11-jre
+VOLUME /tmp
+COPY target/rent-a-car-platform.jar app.jar
+ENTRYPOINT ["java","-jar","/app.jar"]
+
+docker build -t rent-a-car-platform .
+docker run -p 8080:8080 rent-a-car-platform
+
+@Service
+public class ServiceClient {
+
+    @Autowired
+    private RestTemplate restTemplate;
+
+    public String getServiceInfo() {
+        return restTemplate.getForObject("http://service-name/api/service-info", String.class);
+    }
+}
+
+@Bean
+@LoadBalanced
+public RestTemplate restTemplate() {
+    return new RestTemplate();
+}
+
+
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-actuator</artifactId>
+</dependency>
+
+logging.level.root=INFO
+logging.level.com.example=DEBUG
+
+
+npm install mocha chai --save-dev
+
+const assert = require('chai').assert;
+
+describe('Example Test', function() {
+  it('should return true', function() {
+    assert.isTrue(true);
+  });
+});
+
+npx mocha
+
+
+eb init -p java-11
+eb create rentacar-platform-env
+eb deploy
+
+ng build --prod
+
+<dependency>
+    <groupId>io.springfox</groupId>
+    <artifactId>springfox-swagger2</artifactId>
+    <version>2.9.2</version>
+</dependency>
+<dependency>
+    <groupId>io.springfox</groupId>
+    <artifactId>springfox-swagger-ui</artifactId>
+    <version>2.9.2</version>
+</dependency>
+
+
+@Configuration
+@EnableSwagger2
+public class SwaggerConfig {
+    @Bean
+    public Docket api() {
+        return new Docket(DocumentationType.SWAGGER_2)
+            .select()
+            .apis(RequestHandlerSelectors.any())
+            .paths(PathSelectors.any())
+            .build();
+    }
+}
+
